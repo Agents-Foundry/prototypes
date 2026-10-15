@@ -1,0 +1,28 @@
+name: Sprint 01 design-only visual and accessibility checks
+on:
+  pull_request:
+    paths:
+      - 'organization-admin/sprint-01/**'
+      - '.github/workflows/design-sprint-01-qa.yml'
+  workflow_dispatch:
+jobs:
+  visual-accessibility:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: organization-admin/sprint-01/verification
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:visual
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sprint-01-visual-accessibility-results
+          path: |
+            organization-admin/sprint-01/verification/test-results/
+            organization-admin/sprint-01/verification/playwright-report/
+          retention-days: 30
