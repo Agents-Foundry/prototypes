@@ -1,0 +1,14 @@
+id,slug,module,journey,status,asset
+ORG-001,admin-sign-in,authentication,onboarding,planned,
+ORG-002,welcome-setup,onboarding,onboarding,planned,
+ORG-003,organization-details,onboarding,onboarding,planned,
+ORG-004,admin-dashboard,dashboard,management,draft,screens/ORG-004-admin-dashboard-v1.0-draft.svg
+ORG-005,departments-and-teams,hierarchy,organization,planned,
+ORG-006,roles-and-positions,hierarchy,organization,planned,
+ORG-007,ai-employees-directory,workforce,hiring,draft,screens/ORG-007-ai-employees-directory-v1.0-draft.svg
+ORG-008,hire-choose-blueprint,hiring,hiring,planned,
+ORG-009,hire-configure-role,hiring,hiring,planned,
+ORG-010,hire-select-capabilities,hiring,hiring,planned,
+ORG-011,hire-connect-integrations,hiring,hiring,planned,
+ORG-012,hire-review-activation,hiring,hiring,planned,
+ORG-013,activation-result,hiring,hiring,planned,
