@@ -14,8 +14,8 @@
 | Gate | Status | Signer / evidence |
 |---|---|---|
 | Product policy DEC-01–08 | APPROVED | Product owner in design conversation; approval file |
-| Cross-breakpoint browser QA | PENDING execution | CI report/screenshots from exact baseline commit |
-| Accessibility (automated) | PENDING execution | CI axe report |
+| Automated cross-breakpoint Chromium QA | PASSED (18-test suite) | [Run 38777557582](https://github.com/Agents-Foundry/prototypes/actions/runs/38777557582); manual screenshot review pending |
+| Accessibility (automated) | PASSED for targeted axe tests | [Run 38777557582](https://github.com/Agents-Foundry/prototypes/actions/runs/38777557582); not a WCAG certification |
 | Accessibility (manual/assistive tech) | PENDING independent reviewer | Signed checklist |
 | Security review | PENDING independent reviewer | Signed threat model |
 | Visual design-owner sign-off | PENDING | Explicit screen/revision acceptance |
