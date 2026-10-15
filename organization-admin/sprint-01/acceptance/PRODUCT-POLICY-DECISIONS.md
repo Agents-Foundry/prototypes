@@ -1,6 +1,6 @@
 # Product policy options — explicit owner approval required
 
-These are **recommended defaults, not previously approved decisions**. The product owner and security reviewer must accept or revise them.
+These are proposed defaults unless individually approved below. Product-owner approval does not substitute for security review.
 
 | ID | Topic | Recommended default | Tradeoff |
 |---|---|---|---|
@@ -13,7 +13,14 @@ These are **recommended defaults, not previously approved decisions**. The produ
 | DEC-07 | Budget owner | Cost attributed to owning department/team, organization admin defines caps | Accountability vs multi-team cost sharing |
 | DEC-08 | Activation lifecycle | Draft → Review → Pending approval (when required) → Provisioning → Active; reject/failed states separate | Correct visibility with more states |
 
-## Approval form
-Product owner: **PENDING** · Security reviewer: **PENDING** · Date: —
+## Recorded individual decisions
+
+| ID | Product-owner decision | Date | Security review |
+|---|---|---|---|
+| DEC-01 | **APPROVED — Option A:** At least one department and owning team must exist before AI employee **activation**. Hiring may begin as a draft; guided setup can create the required entities during hiring. | 2026-10-15 | Pending |
+| DEC-02–DEC-08 | Pending individual review | — | Pending |
+
+## Overall approval form
+Product owner: **PARTIAL (DEC-01 only)** · Security reviewer: **PENDING** · Date: 2026-10-15
 
 Record decisions separately with reviewer/role, accepted/rejected option and rationale. Do not treat merger of this document as consent to policy defaults.
