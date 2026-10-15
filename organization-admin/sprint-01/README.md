@@ -15,3 +15,13 @@ The first generated multi-screen contact sheet exists in the ChatGPT design disc
 
 ## Approval gate
 Require review of each screen, page states, hierarchy semantics, employee vs blueprint distinction, provider BYOK UX, connection health states, approval policies and activation safety gates.
+
+
+## Refinement review package — PR #3
+
+- [Interactive HTML prototype](prototype/index.html): open locally in a browser to navigate 13 screen concepts, preview states, toggle light/dark mode and exercise selected safe confirmation flows. GitHub does not execute HTML in its source viewer; download/open the file, or host as a reviewed static design preview.
+- [State matrix](interaction-states/STATE-MATRIX.md): required normal, empty, loading, error, access-restricted and approval states for each screen.
+- [Responsive and accessibility guidelines](design-system/RESPONSIVE-ACCESSIBILITY.md).
+- [User-flow decisions](USER-FLOW-DECISIONS.md): open product questions and activation gate semantics.
+
+**Design maturity:** Interaction exploration delivered. Final frame-by-frame state visuals, tested responsive screenshots, Figma master file, formal accessibility validation and stakeholder sign-off are NOT complete and must not be represented as approved.
