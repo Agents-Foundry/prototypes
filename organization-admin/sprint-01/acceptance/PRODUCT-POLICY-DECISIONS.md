@@ -20,9 +20,10 @@ These are proposed defaults unless individually approved below. Product-owner ap
 | DEC-01 | **APPROVED — Option A:** At least one department and owning team must exist before AI employee **activation**. Hiring may begin as a draft; guided setup can create the required entities during hiring. | 2026-10-15 | Pending |
 | DEC-02 | **APPROVED — Option B:** One primary owning team controls employee accountability, budget and governance. Other teams may receive explicitly granted, scoped, revocable access, without automatically inheriting the owner's permissions. | 2026-10-15 | Pending |
 | DEC-03 | **APPROVED — Option B:** Organization-managed provider credentials plus employee-owned BYOK only when organization policy permits. Employee secrets stay private from admins; raw keys remain in a protected vault and never appear in chat/logs/design mockups. Provider/model allowlists apply regardless of key owner. Revocation blocks new authorized use and surfaces connection health. Personal and organization usage/cost attribution remain separate. | 2026-10-15 | Pending |
-| DEC-04–DEC-08 | Pending individual review | — | Pending |
+| DEC-04 | **APPROVED — Option B:** Organization administrators maintain approved provider/model allowlists; each AI employee selects a default model within those limits, with explicitly authorized fallback models and optional policy-controlled task routing. Credential ownership follows DEC-03. Budget, data residency, retention and tool-use controls apply regardless of model choice. If no permitted model or fallback is available, execution pauses with a clear blocked-state explanation. | 2026-10-15 | Pending |
+| DEC-05–DEC-08 | Pending individual review | — | Pending |
 
 ## Overall approval form
-Product owner: **PARTIAL (DEC-01 through DEC-03)** · Security reviewer: **PENDING** · Date: 2026-10-15
+Product owner: **PARTIAL (DEC-01 through DEC-04)** · Security reviewer: **PENDING** · Date: 2026-10-15
 
 Record decisions separately with reviewer/role, accepted/rejected option and rationale. Do not treat merger of this document as consent to policy defaults.
