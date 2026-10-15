@@ -25,3 +25,7 @@ Require review of each screen, page states, hierarchy semantics, employee vs blu
 - [User-flow decisions](USER-FLOW-DECISIONS.md): open product questions and activation gate semantics.
 
 **Design maturity:** Interaction exploration delivered. Final frame-by-frame state visuals, tested responsive screenshots, Figma master file, formal accessibility validation and stakeholder sign-off are NOT complete and must not be represented as approved.
+
+## PR #4 QA gate
+
+See [QA audit and sign-off](qa/README.md) and [15 state previews](qa/visual-states/README.md). All artifacts remain draft until explicit review and outstanding P0/P1 items are resolved. Merge does not constitute design freeze.
