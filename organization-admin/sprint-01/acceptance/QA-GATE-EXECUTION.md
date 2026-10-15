@@ -1,15 +1,25 @@
-# Independent gate execution
+# Sprint 01 Automated QA execution record
 
-## Actions in this PR
-- Added reproducible Playwright Chromium screenshot/viewport, wizard and activation scenario tests.
-- Added automated axe-based accessibility checks on seven critical screens.
-- Added manual accessibility and independent security evidence requirements.
-- Prepared v1.0-rc2 baseline candidate.
+## Run 1 — failures identified
+- [GitHub Actions run 38777102639](https://github.com/Agents-Foundry/prototypes/actions/runs/38777102639): **FAILED**.
+- 15 tests passed, 3 failed: 375px horizontal overflow, 768px horizontal overflow and narrow-width 200%-zoom approximation overflow.
+- Root category: insufficient narrow viewport constraints for grid/navigation.
+- Failure artifacts preserved in GitHub Actions.
 
-## Run status
-**Not executed in GitHub Actions at authoring time.** CI is configured to run when a PR includes changes under `organization-admin/sprint-01/**`. Once triggered, review the job status, failure logs and artifact screenshots; commit fixes and rerun until passing.
+## Corrective design-prototype change
+- Commit `3cb903b229d2cce23617478517ce428930e89052` adds layout constraints, scrollable navigation strip and narrow-width wrapping to the review-only HTML prototype.
 
-Automated axe checks do not equal WCAG conformance. Required manual checks include screen reader operation, focus and keyboard trap prevention, appropriate visual contrast and 200% zoom usability.
+## Run 2 — automated gate passed
+- [GitHub Actions run 38777557582](https://github.com/Agents-Foundry/prototypes/actions/runs/38777557582): **PASSED**.
+- Playwright test suite: **18 passed** (6 target viewport checks, wizard/activation behavior scenarios and axe-based critical-screen checks).
+- Chromimum headless in GitHub Actions. This is evidence for the automated tests as written; no claim is made for other browsers, full manual visual comparison or comprehensive WCAG 2.2 AA compliance.
 
-## Final freeze requires
-Successful browser QA evidence and remediation, reviewer-approved screenshot references, signed security design review and signed manual accessibility/design inspection.
+## Acceptance distinction
+- **Automated Chromium/axe smoke gate:** Passed on the recorded commit.
+- **Independent visual review:** Pending screenshot inspection/approval.
+- **Manual accessibility:** Pending keyboard + assistive technology + real 200% zoom and color contrast review.
+- **Security design approval:** Pending independent security/governance signature.
+- **Design owner signature:** Pending.
+- **Final baseline v1.0 freeze:** BLOCKED.
+
+No production application source was changed.
