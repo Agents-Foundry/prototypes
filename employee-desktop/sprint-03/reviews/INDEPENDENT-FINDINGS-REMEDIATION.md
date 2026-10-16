@@ -13,13 +13,13 @@
 
 | Track | Source protocol | Required review scope | Named reviewer | Review SHA | Evidence URL | Disposition |
 |---|---|---|---|---|---|---|
-| SEC | `SECURITY-PRIVACY-REVIEW.md` | SEC-01–14; EMP-DEC-01–10 mapping; 24-hour encrypted read-only offline risk | UNASSIGNED | NOT TESTED | MISSING | PENDING |
-| A11Y | `ACCESSIBILITY-VISUAL-QA-REVIEW.md` | A11Y-01–10, keyboard, NVDA/VoiceOver, announcements, contrast, forced colors | UNASSIGNED | NOT TESTED | MISSING | PENDING |
-| ZOOM | `ACCESSIBILITY-VISUAL-QA-REVIEW.md` | Actual browser 200%/400% zoom, OS scaling, reflow and usability | UNASSIGNED | NOT TESTED | MISSING | PENDING |
-| VIS | `ACCESSIBILITY-VISUAL-QA-REVIEW.md` | All 32 concept SVGs, 72 state variants and representative runtime-prototype screenshots | UNASSIGNED | NOT TESTED | MISSING | PENDING |
+| SEC | `SECURITY-PRIVACY-REVIEW.md` | SEC-01–14; EMP-DEC-01–10 mapping; 24-hour encrypted read-only offline risk | Internal QA/security team — named individual pending | NOT TESTED | MISSING | PENDING |
+| A11Y | `ACCESSIBILITY-VISUAL-QA-REVIEW.md` | A11Y-01–10, keyboard, NVDA/VoiceOver, announcements, contrast, forced colors | Internal QA/security team — named individual pending | NOT TESTED | MISSING | PENDING |
+| ZOOM | `ACCESSIBILITY-VISUAL-QA-REVIEW.md` | Actual browser 200%/400% zoom, OS scaling, reflow and usability | Internal QA/security team — named individual pending | NOT TESTED | MISSING | PENDING |
+| VIS | `ACCESSIBILITY-VISUAL-QA-REVIEW.md` | All 32 concept SVGs, 72 state variants and representative runtime-prototype screenshots | Internal QA/security team — named individual pending | NOT TESTED | MISSING | PENDING |
 | PO | `REVIEW-GATES.md` | Final review of resolved findings and explicit freeze decision | Product owner | NOT TESTED | MISSING | BLOCKED |
 
-Reviewers must be independent of the author of the design under assessment. A design owner can approve visual direction but cannot substitute for an independent accessibility or security assessor.
+Product-owner reviewer sourcing decision (2026-10-16): use the **existing internal QA/security team**; do not procure external reviewers by default. Security/privacy is assigned to an internal security-team assessor; accessibility, actual zoom and visual QA to internal QA assessors with relevant expertise. **Individual names and availability are still unconfirmed**. Reviewers must be independent of the author of the design under assessment. A design owner can approve visual direction but cannot substitute for an independent accessibility or security assessor.
 
 ## Findings register
 
