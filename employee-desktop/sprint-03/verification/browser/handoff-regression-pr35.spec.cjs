@@ -18,6 +18,7 @@ test('handoff: fresh approval is required after policy drift', async ({page}) =>
 test('handoff: offline expired cache cannot progress to privileged browser result', async ({page}) => {
   await toApproval(page);
   await page.getByRole('button',{name:'Approve exact action'}).click();
+  await page.getByRole('button',{name:'Continue with approved action'}).click();
   await page.getByRole('button',{name:'Go offline'}).click();
   await page.getByRole('button',{name:'Simulate offline authorization expiry'}).click();
   await expect(page.getByRole('status')).toContainText('cached access denied');
@@ -26,6 +27,7 @@ test('handoff: offline expired cache cannot progress to privileged browser resul
 test('handoff: unknown outcome cannot be marked complete without simulated receipt', async ({page}) => {
   await toApproval(page);
   await page.getByRole('button',{name:'Approve exact action'}).click();
+  await page.getByRole('button',{name:'Continue with approved action'}).click();
   await page.getByRole('button',{name:'Browser timeout'}).click();
   await expect(page.getByRole('button',{name:'Mark confirmed completion'})).toHaveCount(0);
   await page.getByRole('button',{name:'Outcome still unknown — do not retry'}).click();

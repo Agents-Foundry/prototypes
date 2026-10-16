@@ -8,6 +8,7 @@ async function permission(page) {
 async function browser(page) {
   await permission(page);
   await page.getByRole('button', {name:'Approve exact action'}).click();
+  await page.getByRole('button', {name:'Continue with approved action'}).click();
 }
 test('changed target and policy fail closed', async ({page}) => {
   await permission(page);
@@ -34,6 +35,7 @@ test('offline expired and corrupt cache deny access', async ({page}) => {
   await expect(page.getByRole('status')).toContainText('old approval cannot be reused');
   await page.getByRole('button', {name:'Request fresh approval'}).click();
   await page.getByRole('button', {name:'Approve exact action'}).click();
+  await page.getByRole('button', {name:'Continue with approved action'}).click();
   await page.getByRole('button', {name:'Go offline'}).click();
   await page.getByRole('button', {name:'Simulate unreadable encrypted cache'}).click();
   await expect(page.getByRole('status')).toContainText('access denied');

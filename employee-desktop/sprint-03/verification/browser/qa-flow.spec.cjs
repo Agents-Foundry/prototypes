@@ -23,6 +23,8 @@ test('expired and revoked permission show safe recovery route',async ({page})=>{
 test('offline then reconnect requires outcome verification',async ({page})=>{
   for(let i=0;i<2;i++) await page.getByRole('button',{name:'Continue simulated review'}).click();
   await page.getByRole('button',{name:'Approve exact action'}).click();
+  await expect(page.locator('#approval-receipt')).toContainText('Single use');
+  await page.getByRole('button',{name:'Continue with approved action'}).click();
   await expect(page.getByRole('heading',{name:'Run browser testing'})).toBeVisible();
   await page.getByRole('button',{name:'Go offline'}).click();
   await expect(page.getByRole('status')).toContainText('offline');
@@ -35,6 +37,8 @@ test('offline then reconnect requires outcome verification',async ({page})=>{
 test('unknown browser outcome cannot automatically pass',async ({page})=>{
   for(let i=0;i<2;i++) await page.getByRole('button',{name:'Continue simulated review'}).click();
   await page.getByRole('button',{name:'Approve exact action'}).click();
+  await expect(page.locator('#approval-receipt')).toContainText('Single use');
+  await page.getByRole('button',{name:'Continue with approved action'}).click();
   await page.getByRole('button',{name:'Browser timeout'}).click();
   await expect(page.getByRole('status')).toContainText('unknown');
   await expect(page.getByRole('button',{name:'Test completed with evidence'})).toHaveCount(0);

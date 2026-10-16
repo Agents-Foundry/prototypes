@@ -19,6 +19,9 @@ async function setup(page, scenario) {
     return page.getByRole('button', {name: 'Revoke credential'}).click();
   }
   await page.getByRole('button', {name: 'Approve exact action'}).click();
+  // PO35-02 Option A requires an explicit receipt acknowledgement before the browser stage.
+  await expect(page.locator('#approval-receipt')).toContainText('Single use');
+  await page.getByRole('button', {name: 'Continue with approved action'}).click();
   if (scenario === 'unknown') return page.getByRole('button', {name: 'Browser timeout'}).click();
   await page.getByRole('button', {name: 'Go offline'}).click();
   if (scenario === 'reconnected') await page.getByRole('button', {name: 'Reconnect and reauthorize'}).click();
