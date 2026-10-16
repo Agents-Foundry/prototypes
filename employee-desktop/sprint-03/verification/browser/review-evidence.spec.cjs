@@ -21,7 +21,7 @@ async function setup(page, scenario) {
   await page.getByRole('button', {name: 'Approve exact action'}).click();
   if (scenario === 'unknown') return page.getByRole('button', {name: 'Browser timeout'}).click();
   await page.getByRole('button', {name: 'Go offline'}).click();
-  if (scenario === 'reconnected') await page.getByRole('button', {name: 'Reconnect and validate'}).click();
+  if (scenario === 'reconnected') await page.getByRole('button', {name: 'Reconnect and reauthorize'}).click();
 }
 for (const theme of ['light', 'dark']) {
   for (const width of [480, 960, 1440]) {
