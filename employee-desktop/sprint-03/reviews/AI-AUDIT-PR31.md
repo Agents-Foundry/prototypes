@@ -23,3 +23,10 @@
 ## Retest contract
 
 Run `Sprint 03 review evidence` on this PR and inspect 48 scenario reports, axe findings, screenshots and coverage index. Verify `unknown`, `offline`, `reconnected` states in both themes and all widths; manually confirm no misleading “verified” or stale approval claims. Capture run URL, head SHA, count, and any failures before changing status to VERIFIED. Do not sign independent gates or freeze design.
+
+## CI failure and targeted remediation — 2026-10-16
+
+- Failed CI run [38939639464](https://github.com/Agents-Foundry/prototypes/actions/runs/38939639464) at `bacf12cbf0bca0ed24e3dbece6352556a3455296`: **70 passed, 1 failed** in `browser-review` / `npm test`.
+- Root cause: `verification/browser/qa-flow.spec.cjs` still targeted obsolete button name `Reconnect and validate`; the subsequent `Verify external outcome` assertion also referred to an obsolete name. These labels were intentionally changed in the prototype remediation.
+- Fix commit `6befe60f24374e3d0cd8734199b8c6727c82d924`: update selectors to `Reconnect and reauthorize` and `Simulate confirmed remote receipt`; additionally assert prior authorization is invalidated and the non-retry action remains available.
+- **Latest-head CI validation: PENDING**. A passing result must be observed on or after this commit; do not treat the previous failed run as passed.
