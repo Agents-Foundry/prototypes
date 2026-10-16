@@ -16,6 +16,7 @@ for (const theme of ['light', 'dark']) {
         if (scenario === 'denied') await page.getByRole('button', { name: 'Deny' }).click();
         else {
           await page.getByRole('button', { name: 'Approve exact action' }).click();
+          await page.getByRole('button', { name: 'Continue with approved action' }).click();
           await page.getByRole('button', { name: scenario === 'offline' ? 'Go offline' : 'Browser timeout' }).click();
         }
       }
@@ -58,6 +59,7 @@ for (const width of [320, 400, 480]) {
           for (let i = 0; i < 2; i++) await page.getByRole('button', { name: 'Continue simulated review' }).click();
         } else if (scenario === 'offline') {
           await page.getByRole('button', { name: 'Approve exact action' }).click();
+          await page.getByRole('button', { name: 'Continue with approved action' }).click();
           await page.getByRole('button', { name: 'Go offline' }).click();
         }
         const size = await page.evaluate(() => ({
