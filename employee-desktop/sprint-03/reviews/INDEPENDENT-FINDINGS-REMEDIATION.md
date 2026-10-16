@@ -9,6 +9,10 @@
 - Evidence artifact `sprint-03-review-evidence` (ID `12061423686`) uploaded. This is automated Chromium prototype evidence, **not** a manual visual review or specialist approval.
 - Screenshots and JSON reports are review inputs. No independent reviewer has yet recorded results in this register.
 
+## Consolidated source-level evidence (PR #34)
+
+See [`SECURITY-EVIDENCE-LEDGER-PR34.md`](SECURITY-EVIDENCE-LEDGER-PR34.md) for the SEC-01–14 scenario-to-prototype matrix, explicit NOT TESTED dispositions, known approved offline Option A design direction, and outstanding implementation/specialist evidence. The PR #33 baseline merge is `8666be52dd255c4f51748bc9f22a498cc6df971a`. Earlier PR #29 automated evidence remains a historical baseline, not the latest head's CI result. New PR #34 CI must be checked separately. No independent acceptance is implied.
+
 ## Review assignments and evidence collection
 
 | Track | Source protocol | Required review scope | Named reviewer | Review SHA | Evidence URL | Disposition |
