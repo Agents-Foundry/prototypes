@@ -52,10 +52,14 @@ if not prototype.exists():
     errors.append("Missing local-only HTML prototype")
 else:
     html = prototype.read_text(encoding="utf-8")
-    for marker in ('role="status"', 'aria-live="polite"', "mode=\"denied\"",
-                   "mode=\"expired\"","mode=\"revoked\"","mode=\"unknown\"",
-                   "mode=\"offline\""):
-        if marker not in html: errors.append(f"Missing prototype state marker: {marker}")
+    for marker in ('role="status"', 'aria-live="polite"'):
+        if marker not in html: errors.append(f"Missing prototype accessibility marker: {marker}")
+    for state in ("denied", "expired", "revoked", "unknown", "offline"):
+        # Both mode="state" and scenario("state") are intentional mock transitions.
+        direct = 'mode="' + state + '"'
+        centralized = 'scenario("' + state + '")'
+        if direct not in html and centralized not in html:
+            errors.append(f"Missing prototype transition for state: {state}")
     if re.search(r"<script[^>]+src=|https?://|fetch\s*\(|XMLHttpRequest|WebSocket", html):
         errors.append("Prototype contains a possible external dependency")
 print(f"Verified {len(expected_state)} critical-state SVGs and 32 screen concepts")
