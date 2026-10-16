@@ -1,6 +1,6 @@
 # Sprint 03 — final regression and product-owner handoff (PR #35)
 
-**Status: HANDOFF PACKAGE IN PREPARATION — PR #35 CI PENDING.** Design-only prototype, no production application code or real external writes. **Final design freeze: BLOCKED.** Product-owner design direction is not specialist approval.
+**Status: AUTOMATED PR #35 REGRESSION PASSED — PRODUCT-OWNER WALKTHROUGH PENDING.** Design-only prototype, no production application code or real external writes. **Final design freeze: BLOCKED.** Product-owner design direction is not specialist approval.
 
 ## Immutable historical baseline
 
@@ -11,7 +11,7 @@
 | #33 | `8666be52dd255c4f51748bc9f22a498cc6df971a` | All three: SUCCESS | [Browser](https://github.com/Agents-Foundry/prototypes/actions/runs/38941389700), [evidence](https://github.com/Agents-Foundry/prototypes/actions/runs/38941389730), [assets](https://github.com/Agents-Foundry/prototypes/actions/runs/38941389741) |
 | #34 | `2f3a219aff10a60889f6a19ab76e1f1bd342aa73` | Asset integrity and review evidence: SUCCESS; browser run not independently verified in this record | [Evidence](https://github.com/Agents-Foundry/prototypes/actions/runs/38941814096), [assets](https://github.com/Agents-Foundry/prototypes/actions/runs/38941814200) |
 
-**Do not mistake historical success for PR #35 head validation.** Pin the exact PR #35 head SHA and link each new run before declaring regression complete.
+**PR #35 final-head validation:** All three workflows (design asset integrity, browser interaction review, review evidence) passed on PR #35 head `cfc190702844feaec7a14761533913e6e8e87cb6`; merged as `5c9c170be5aeae01973e952198f893607c46c32a`. Automated CI is not manual or independent approval. See [owner walkthrough preparation](PRODUCT-OWNER-WALKTHROUGH-2026-10-16.md).
 
 ## Consolidated design deliverables
 
@@ -26,10 +26,10 @@
 
 | Gate | Required evidence | Disposition at authoring |
 |---|---|---|
-| Design asset integrity | 72 state SVGs + 32 concepts, local prototype marker checks | PR #35 RETEST PENDING |
-| Browser interaction | Keyboard, denial/expiry, offline/reconnect, cancellation and target/policy drift tests | PR #35 RETEST PENDING |
-| Review evidence | 8 states × 2 themes × 3 widths = 48 automated Chromium scenario artifacts; check coverage index and zero axe violations | PR #35 RETEST PENDING |
-| New PR #33 accessibility cases | Theme state, focus, forced-colors emulation, narrow-screen reflow | PR #35 RETEST PENDING |
+| Design asset integrity | 72 state SVGs + 32 concepts, local prototype marker checks | PR #35 AUTOMATED PASS (manual review pending) |
+| Browser interaction | Keyboard, denial/expiry, offline/reconnect, cancellation and target/policy drift tests | PR #35 AUTOMATED PASS (manual review pending) |
+| Review evidence | 8 states × 2 themes × 3 widths = 48 automated Chromium scenario artifacts; check coverage index and zero axe violations | PR #35 AUTOMATED PASS (manual review pending) |
+| New PR #33 accessibility cases | Theme state, focus, forced-colors emulation, narrow-screen reflow | PR #35 AUTOMATED PASS (manual review pending) |
 | Real browser 200%/400% zoom | Manual browser/OS scale and screenshots | NOT TESTED |
 | Screen reader | NVDA/VoiceOver keyboard and live region announcements | NOT TESTED |
 | Independent security/privacy | SEC-01–14, tenant/policy/key/privacy threat review by independent assessor | NOT TESTED |
@@ -53,8 +53,8 @@
 | Field | Required owner entry |
 |---|---|
 | Reviewer / date | PENDING |
-| Reviewed PR #35 SHA | PENDING |
-| CI run links and artifact inventory | PENDING |
+| Reviewed PR #35 SHA | Automated baseline `cfc1907`; owner-reviewed SHA PENDING |
+| CI run links and artifact inventory | All three PR #35 head workflows passed; owner evidence inspection PENDING |
 | Product-owner prototype walkthrough | NOT TESTED |
 | Findings / exceptions / follow-up PRs | PENDING |
 | Product-owner direction accepted for further review? | PENDING |
