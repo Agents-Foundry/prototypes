@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "test:visual": "playwright test",
+    "test:a11y": "playwright test --grep @a11y"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@axe-core/playwright": "^4.10.0"
+  }
+}
