@@ -1,0 +1,24 @@
+# Sprint 03 — PR #41 recovery edge-case reference and receipt-focus observation
+
+**Baseline:** PR #40 merge `f7e165dbe71a9d977378782077a9046fe0decb8f`. **Scope:** local-only design prototype tests and review documentation; no production application code.
+
+## Automated design regression coverage added
+
+Four browser tests check policy drift and credential revocation, unreadable offline cache, requested-versus-confirmed cancellation, and cross-device conflict. They check that the mock workflow does not silently proceed with privileged actions. They do **not** prove backend security, durable storage, authorization, or actual cancellation.
+
+**CI evidence:** PR-head workflows must pass before tests can be described as passing.
+
+## PO41-01 — receipt focus and assistive-technology discoverability (DESIGN OBSERVATION; MANUAL VALIDATION PENDING)
+
+Static review of `prototypes/qa-critical-flow.html` identifies that entering `approval-receipt` focuses the generic workflow step heading rather than a receipt-specific heading. The receipt is a dynamically inserted `dl` with an `aria-label`; the polite status message announces simulated approval but does not read the exact action, target, scope and expiry. A keyboard or screen-reader user may not discover those details before choosing Continue. **This is an inspection-derived usability risk, not a confirmed screen-reader defect.**
+
+**Proposed correction for a follow-up design change:** add a distinct visible, programmatically focusable receipt heading; associate the details list with it; move focus to that heading only when the receipt opens; retain explicit Continue/Cancel controls and visible focus styling. Add Playwright focus/semantics checks, then perform real NVDA/VoiceOver review before closing the finding. This PR does not claim to implement that correction.
+
+## Gates remain open
+
+- PO-01–11 manual owner walkthrough: NOT TESTED; [execution worksheet](PRODUCT-OWNER-WALKTHROUGH-EXECUTION-PR39.md).
+- EMP-DEC-01–10 authoritative approval links and SEC mappings: INCOMPLETE.
+- Independent security/privacy, actual zoom/screen reader and independent visual QA: PENDING.
+- Product-owner acceptance, production code authorization and final design freeze: NOT GRANTED.
+
+No independent finding, owner signature or manual result has been fabricated.
