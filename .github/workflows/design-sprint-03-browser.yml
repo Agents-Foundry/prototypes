@@ -1,0 +1,31 @@
+name: Sprint 03 design browser interaction review
+on:
+  pull_request:
+    paths:
+      - 'employee-desktop/sprint-03/prototypes/**'
+      - 'employee-desktop/sprint-03/verification/browser/**'
+      - '.github/workflows/design-sprint-03-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-review:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: employee-desktop/sprint-03/verification/browser
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sprint-03-design-browser-review
+          path: |
+            employee-desktop/sprint-03/verification/browser/test-results/
+            employee-desktop/sprint-03/verification/browser/playwright-report/
+          retention-days: 30
