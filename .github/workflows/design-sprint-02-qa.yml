@@ -1,0 +1,26 @@
+name: Sprint 02 design responsive accessibility verification
+on:
+  pull_request:
+    paths: ['platform-owner/sprint-02/**','.github/workflows/design-sprint-02-qa.yml']
+  workflow_dispatch:
+jobs:
+  browser-a11y:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: platform-owner/sprint-02/verification
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-audit --no-fund
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sprint-02-browser-a11y-evidence
+          path: |
+            platform-owner/sprint-02/verification/test-results/
+            platform-owner/sprint-02/verification/playwright-report/
+          retention-days: 30
