@@ -4,7 +4,7 @@
 
 | ID | Decision | Proposed design default | Status |
 |---|---|---|---|
-| PLT-DEC-01 | Platform vs tenant admin privilege boundary | No default access to tenant conversations/secrets; scoped support sessions require customer authorization | Pending |
+| PLT-DEC-01 | Platform vs tenant admin privilege boundary | **APPROVED — Option B:** Strict cross-tenant isolation and deny-by-default platform operator access to tenant conversations, credentials, secrets and internal content. Operators may manage tenant metadata, lifecycle, subscriptions and platform operations. Exceptional support access requires customer authorization, explicit scope, time limits, stronger approval/independent oversight, immutable audit and immediate revocation; routine operator views remain redacted. | Product owner approved 2026-10-16; independent security review pending |
 | PLT-DEC-02 | Tenant creation authority | Platform-only tenant creation, four-eyes review for high-risk settings and billable resources | Pending |
 | PLT-DEC-03 | Region and residency | Region selected at provisioning, clear immutability/migration safeguards | Pending |
 | PLT-DEC-04 | Plans and billing | Central plan entitlements with audited trial upgrades and hard limits | Pending |
@@ -16,3 +16,11 @@
 | PLT-DEC-10 | Telemetry and privacy | Tenant-minimized aggregate statistics, redaction and bounded retention | Pending |
 
 Decision record format: option, approved wording, authorizing role, date, reviewer concern, affected screen IDs, security review result.
+
+## Recorded individual product-owner approvals
+
+| ID | Approved choice | Authority | Date | Affected screens | Independent security | Design freeze |
+|---|---|---|---|---|---|---|
+| PLT-DEC-01 | **Option B — strict tenant isolation with authorized, scoped and auditable support access** | Product owner (explicit individual approval in design conversation) | 2026-10-16 | PLT-003, PLT-004, PLT-013, PLT-014, PLT-017, PLT-018, PLT-020 | **Pending** | **Not approved** |
+
+**Approval count: 1/10.** Approval of policy direction does not authorize exceptional access, waive customer consent, or sign off implementation/security controls.
