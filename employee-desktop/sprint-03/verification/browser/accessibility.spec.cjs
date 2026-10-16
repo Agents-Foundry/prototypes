@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const AxeBuilder = require('@axe-core/playwright');
+const AxeBuilder = require('@axe-core/playwright').default;
 const path = require('node:path');
 const url = 'file://' + path.resolve(__dirname, '../../prototypes/qa-critical-flow.html');
 
