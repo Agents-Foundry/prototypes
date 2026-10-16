@@ -1,0 +1,40 @@
+name: Sprint 03 review evidence
+on:
+  pull_request:
+    paths:
+      - 'employee-desktop/sprint-03/**'
+      - '.github/workflows/sprint-03-review-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: employee-desktop/sprint-03/verification/browser
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run review evidence matrix
+        run: npx playwright test review-evidence.spec.cjs
+      - name: Build coverage index (fail on missing or failed evidence)
+        if: always()
+        run: python3 build_review_index.py
+      - name: Upload screenshots, reports and review index
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sprint-03-review-evidence
+          path: |
+            employee-desktop/sprint-03/verification/browser/test-results/
+            employee-desktop/sprint-03/verification/browser/playwright-report/
+          retention-days: 14
+          if-no-files-found: warn
