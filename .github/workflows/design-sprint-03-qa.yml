@@ -1,0 +1,24 @@
+name: Sprint 03 design asset integrity
+on:
+  pull_request:
+    paths:
+      - 'employee-desktop/sprint-03/**'
+      - '.github/workflows/design-sprint-03-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'employee-desktop/sprint-03/**'
+      - '.github/workflows/design-sprint-03-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate conceptual SVG inventory and mock prototype
+        run: python employee-desktop/sprint-03/verification/check_assets.py
