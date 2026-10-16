@@ -26,8 +26,11 @@ test('offline then reconnect requires outcome verification',async ({page})=>{
   await expect(page.getByRole('heading',{name:'Run browser testing'})).toBeVisible();
   await page.getByRole('button',{name:'Go offline'}).click();
   await expect(page.getByRole('status')).toContainText('offline');
-  await page.getByRole('button',{name:'Reconnect and validate'}).click();
-  await expect(page.getByRole('button',{name:'Verify external outcome'})).toBeVisible();
+  await page.getByRole('button',{name:'Reconnect and reauthorize'}).click();
+  await expect(page.getByRole('status')).toContainText('previous authorization invalidated');
+  await expect(page.getByRole('button',{name:'Simulate confirmed remote receipt'})).toBeVisible();
+  await expect(page.getByRole('button',{name:'Outcome still unknown — do not retry'})).toBeVisible();
+  await expect(page.locator('#auth')).toContainText('Scoped read-only');
 });
 test('unknown browser outcome cannot automatically pass',async ({page})=>{
   for(let i=0;i<2;i++) await page.getByRole('button',{name:'Continue simulated review'}).click();
