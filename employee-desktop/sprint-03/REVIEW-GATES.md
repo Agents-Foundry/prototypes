@@ -13,8 +13,8 @@ This ledger distinguishes **merged design/test infrastructure**, **observed CI e
 | Accessibility, keyboard and responsive/zoom proxy checks | MERGED (PR #24) — CURRENT PASS UNVERIFIED | `verification/browser/accessibility.spec.cjs`; inspect current CI, attach reports |
 | Independent security/privacy review package | MERGED (PR #25) — ASSESSMENT PENDING | `reviews/SECURITY-PRIVACY-REVIEW.md`; independent assessor and findings needed |
 | Independent accessibility and visual QA protocol | MERGED (PR #26) — MANUAL EXECUTION PENDING | `reviews/ACCESSIBILITY-VISUAL-QA-REVIEW.md`; named reviewers and evidence needed |
-| 48-case browser evidence matrix | MERGED (PR #27) — EXECUTION UNVERIFIED | `verification/browser/review-evidence.spec.cjs`; screenshots/JSON must be inspected |
-| CI artifact publication and coverage index | MERGED (PR #28) — EXECUTION UNVERIFIED | `.github/workflows/sprint-03-review-evidence.yml`, `build_review_index.py`; workflow/artifact verification pending |
+| 48-case browser evidence matrix | **AUTOMATED PASS 48/48** at pinned PR #29 SHA | `verification/browser/review-evidence.spec.cjs`; screenshots/JSON must be inspected |
+| CI artifact publication and coverage index | **CI SUCCESS; 48/48 evidence captured** at pinned PR #29 SHA | `.github/workflows/sprint-03-review-evidence.yml`, `build_review_index.py`; workflow/artifact verification pending |
 | Actual 200% browser/OS zoom and screen-reader usability | NOT TESTED / NOT SIGNED OFF | Real devices, browsers and assistive technologies, not CSS proxies |
 | Visual QA and design-owner acceptance | PENDING | Per-screen/state/theme/width findings against pinned SHA |
 | Independent security/privacy acceptance | PENDING | Threat assessment and disposition of residual risks |
@@ -31,3 +31,13 @@ This ledger distinguishes **merged design/test infrastructure**, **observed CI e
 - Independently execute manual accessibility, real zoom, visual QA and security/privacy assessments. **No specialist sign-off or final freeze has occurred.**
 
 **Scope:** design-only prototypes, simulated states and automated verification. No production application code or privileged real-world actions authorized.
+
+## Verified GitHub Actions execution — 2026-10-16
+
+- Workflow run: https://github.com/Agents-Foundry/prototypes/actions/runs/38938278637 (event: `pull_request`, attempt 1).
+- Evaluated commit: `76d5addafc1b9685e6e82d351276db8e10ec8901` (PR #29 head, not a `main` branch run).
+- GitHub run: `completed`, conclusion **success**. `evidence` job and its Playwright, index generation, and artifact-upload steps each concluded **success**.
+- Job log explicitly reports **48 passed (43.8s)**; evidence-index summary: `expected: 48`, `captured: 48`, `automatedPass: 48`, `automatedFailures: 0`, `missingOrInvalid: 0`.
+- Uploaded artifact: `sprint-03-review-evidence`, artifact ID `12061423686`, 13,862,531 bytes (~13.9 MB), not expired when queried.
+- These conclusions are supported by actual GitHub Actions run/job/log output. They do **not** establish human review of screenshot contents or artifact-level visual quality, independent security assurance, manual screen-reader/real-zoom verification, or the final UX design freeze. All such gates remain **pending**.
+- The earlier snapshot above records what had been observable **before** the supplied run was identified; this section supersedes its 'no inspected run' observation for the PR #29 head SHA.
