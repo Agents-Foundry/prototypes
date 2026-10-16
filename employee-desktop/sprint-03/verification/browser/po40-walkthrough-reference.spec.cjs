@@ -31,7 +31,7 @@ test('PO40 automated reference: deny and target drift invalidate receipt progres
  await expect(page.getByRole('button',{name:'Approve exact action'})).toHaveCount(0);
  await page.getByRole('button',{name:'Request fresh approval'}).click();
  await page.getByRole('button',{name:'Simulate changed Jira target'}).click();
- await expect(page.getByRole('status')).toContainText('State: approval-target-changed');
+ await expect(page.getByRole('status')).toContainText('Action target changed; exact-operation approval invalidated.');
  await expect(page.getByRole('button',{name:'Approve exact action'})).toHaveCount(0);
  await page.getByRole('button',{name:'Request fresh approval'}).click();
  await expect(page.getByRole('heading',{name:'Request write permission'})).toBeVisible();
