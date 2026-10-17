@@ -20,7 +20,8 @@
 ## Consolidated gate matrix
 | Gate | Evidence to link | Status | Accountable reviewer |
 | --- | --- | --- | --- |
-| PR40–PR44 CI | Workflow run and job URLs, head SHA, result, failure logs | UNVERIFIED in this report | CI maintainer — unassigned |
+| PR40–PR43 CI | Workflow run and job URLs, head SHA, result, failure logs | UNVERIFIED in this report | CI maintainer — unassigned |
+| PR44 CI | Two PR-head workflow runs and successful job outcomes | VERIFIED AUTOMATED CI (see below) | GitHub Actions |
 | Receipt focus and screen reader | Actual AT/browser versions, observations, screenshots/recording | NOT RUN in worksheet | Independent accessibility — unassigned |
 | Real 200%/400% browser zoom and narrow width | Browser/OS, zoom and viewport details, visible controls and reflow | NOT RUN in worksheet | Independent accessibility — unassigned |
 | Light/dark/forced-colors visual QA | Human review, images, defect IDs | NOT RUN in worksheet | Independent visual QA — unassigned |
@@ -44,3 +45,10 @@
 5. Publish a new versioned readiness decision only after all mandatory gates are evidenced.
 
 No production application code, unauthorized merge, self-granted independent approval, product-owner acceptance or final design freeze is part of PR44.
+
+## Verified PR44 CI evidence — 2026-10-17
+- Head SHA at verification: `52fc431841a6efd31356973190d62def7eefa1f7` (before any evidence-only documentation update).
+- [Sprint 03 review evidence run 39044709360](https://github.com/Agents-Foundry/prototypes/actions/runs/39044709360): completed **success**. Evidence job `117431029714` completed **success**; job logs show **48 passed (35.1s)** and `automatedFailures: 0`. Artifact upload step completed successfully.
+- [Sprint 03 design asset integrity run 39044709153](https://github.com/Agents-Foundry/prototypes/actions/runs/39044709153): completed **success**. Integrity job `117431028827` completed **success**; logs say **72 critical-state SVGs and 32 screen concepts** verified.
+- Logs include a Node `DEP0169` `url.parse()` deprecation warning; no failed step was observed. Treat as dependency maintenance follow-up, not a demonstrated vulnerability or test failure.
+- These links establish the stated **automated** outcomes for the original PR44 head only. A new documentation commit requires its own fresh CI check. They do **not** close any manual or independent review gate.
