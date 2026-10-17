@@ -53,3 +53,22 @@ for(const theme of ['dark','forced-colors']){
   await expect(page.getByRole('button',{name:'Cancel approval'})).toBeVisible();
  });
 }
+
+for(const width of [320,400]){
+ for(const theme of ['light','dark']){
+  test('PO41 receipt: no horizontal overflow at '+width+'px in '+theme+' mode',async({page})=>{
+   await page.setViewportSize({width,height:760});
+   await page.goto(url);
+   if(theme==='dark') await page.getByRole('button',{name:'Toggle light / dark'}).click();
+   for(let i=0;i<2;i++) await page.getByRole('button',{name:'Continue simulated review'}).click();
+   await page.getByRole('button',{name:'Approve exact action'}).click();
+   const heading=page.getByRole('heading',{level:3,name:'Review simulated one-time approval receipt'});
+   await expect(heading).toBeFocused();
+   await expect(page.locator('#approval-receipt')).toBeVisible();
+   await expect(page.getByRole('button',{name:'Continue with approved action'})).toBeVisible();
+   await expect(page.getByRole('button',{name:'Cancel approval'})).toBeVisible();
+   const horizontalOverflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth);
+   expect(horizontalOverflow).toBe(false);
+  });
+ }
+}
