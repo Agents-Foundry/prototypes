@@ -52,3 +52,11 @@ No production application code, unauthorized merge, self-granted independent app
 - [Sprint 03 design asset integrity run 39044709153](https://github.com/Agents-Foundry/prototypes/actions/runs/39044709153): completed **success**. Integrity job `117431028827` completed **success**; logs say **72 critical-state SVGs and 32 screen concepts** verified.
 - Logs include a Node `DEP0169` `url.parse()` deprecation warning; no failed step was observed. Treat as dependency maintenance follow-up, not a demonstrated vulnerability or test failure.
 - These links establish the stated **automated** outcomes for the original PR44 head only. A new documentation commit requires its own fresh CI check. They do **not** close any manual or independent review gate.
+
+## Verified latest PR44 head CI — 2026-10-17
+
+- Head SHA: `e4f7b7f006062f2cb21df7aeb560d5ae28dd7ec7`. These checks apply to this exact head; any later documentation change requires its own fresh check.
+- [Sprint 03 review evidence run 39058332591](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332591): **success**. [Evidence job 117470831948](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332591/job/117470831948) reports **48 passed (42.5s)** and `automatedFailures: 0`; 291 files uploaded as [artifact 12110665698](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332591/artifacts/12110665698).
+- [Sprint 03 design asset integrity run 39058332588](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332588): **success**. [Integrity job 117470831942](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332588/job/117470831942) verified **72 critical-state SVGs and 32 screen concepts**.
+- Log follow-up (non-failing): Node `DEP0040` (`punycode`), `DEP0169` (`url.parse()`), and GitHub Actions Node.js 20 deprecation/Node.js 24 compatibility warning affecting checkout/setup/upload actions. Review action versions and dependency provenance in a separately scoped maintenance change; these warnings alone are not evidence of a vulnerability or failed check.
+- **Scope boundary:** Automated CI success does not establish actual browser zoom, manual visual QA, screen-reader accessibility, independent security/privacy review, product-owner acceptance or final design freeze. All those gates remain open.
