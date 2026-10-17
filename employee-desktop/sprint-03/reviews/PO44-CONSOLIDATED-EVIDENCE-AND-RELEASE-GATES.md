@@ -1,0 +1,62 @@
+# Sprint 03 — PR44 Consolidated Evidence and Release-Gate Readiness
+
+**Disposition: NOT READY FOR DESIGN FREEZE.** This is an evidence-index and review-planning document, not an assertion of tests performed or approvals granted.
+
+## Source milestones
+| PR | Scope | Main merge commit | Interpretation |
+| --- | --- | --- | --- |
+| [#40](https://github.com/Agents-Foundry/prototypes/pull/40) | Automated PO walkthrough reference regressions | `f7e165dbe71a9d977378782077a9046fe0decb8f` | Tests committed; inspect CI evidence separately |
+| [#41](https://github.com/Agents-Foundry/prototypes/pull/41) | Receipt focus and recovery-edge regressions | `94f83aac5fcc94c9714ff4595a641ead6325c87d` | Design and automated scenarios; no independent sign-off implied |
+| [#42](https://github.com/Agents-Foundry/prototypes/pull/42) | Evidence ledger and review gates | `33d97c6ec5de5b00bc3ceddc353b2e8548b1395c` | Checklist only |
+| [#43](https://github.com/Agents-Foundry/prototypes/pull/43) | Independent validation worksheet and defect triage | `88907b049259b999c6f47b92553a4a9e99d970fa` | Ten scenarios listed NOT RUN pending evidence |
+
+## Evidence reconciliation rules
+- **Code/test exists** means only that it was committed. A passing check requires a linked run, SHA, job and conclusion.
+- **Emulated viewport or forced-colors checks** do not establish actual browser zoom or human visual QA.
+- **Automated accessibility assertions** do not establish screen-reader, keyboard usability or independent accessibility sign-off.
+- **Merged PR** does not establish product-owner acceptance or final design freeze.
+- Do not turn missing evidence into a PASS or a confirmed FAIL. Use **UNVERIFIED**, **NOT RUN** or **BLOCKED**.
+
+## Consolidated gate matrix
+| Gate | Evidence to link | Status | Accountable reviewer |
+| --- | --- | --- | --- |
+| PR40–PR43 CI | Workflow run and job URLs, head SHA, result, failure logs | UNVERIFIED in this report | CI maintainer — unassigned |
+| PR44 CI | Two PR-head workflow runs and successful job outcomes | VERIFIED AUTOMATED CI (see below) | GitHub Actions |
+| Receipt focus and screen reader | Actual AT/browser versions, observations, screenshots/recording | NOT RUN in worksheet | Independent accessibility — unassigned |
+| Real 200%/400% browser zoom and narrow width | Browser/OS, zoom and viewport details, visible controls and reflow | NOT RUN in worksheet | Independent accessibility — unassigned |
+| Light/dark/forced-colors visual QA | Human review, images, defect IDs | NOT RUN in worksheet | Independent visual QA — unassigned |
+| Policy freshness, offline recovery, cancellation, cross-device privacy | Threat/privacy analysis, reviewer findings and defect dispositions | NOT RUN in worksheet | Independent security/privacy — unassigned |
+| Product-owner scenario walkthrough | PO43 results, unresolved decisions, explicit acceptance/rejection | PENDING | Product owner |
+| Final design freeze | Signed gate matrix, accepted risks, explicit authorization | BLOCKED | Product owner and required independent reviewers |
+
+## Defect and decision rollup
+- **Confirmed defects:** none claimed by this document; no evidence review performed here.
+- **Potential focus discoverability issue PO41-01:** design mitigation and regression assertions were committed in PR41; independent accessibility verification remains pending.
+- **Unknowns:** unresolved issues in external reviews or CI must be reconciled against linked artifacts before status changes.
+- **PO-44-01:** assign independent accessibility, security/privacy and visual QA reviewers.
+- **PO-44-02:** agree minimum browser, OS, assistive technology, zoom and device matrix.
+- **PO-44-03:** decide whether design freeze remains blocked until all mandatory evidence and severity-1/2 defect dispositions are signed. Default: blocked.
+
+## Evidence handoff protocol
+1. Copy each PR's head SHA and checks to this matrix with immutable URLs and timestamps.
+2. Link independently executed PO43 scenario records, defects and retests; redact secrets and user data.
+3. Classify gaps as UNVERIFIED, NOT RUN or BLOCKED; never silently mark PASS.
+4. Obtain independent reviewer dispositions and explicit product-owner decisions.
+5. Publish a new versioned readiness decision only after all mandatory gates are evidenced.
+
+No production application code, unauthorized merge, self-granted independent approval, product-owner acceptance or final design freeze is part of PR44.
+
+## Verified PR44 CI evidence — 2026-10-17
+- Head SHA at verification: `52fc431841a6efd31356973190d62def7eefa1f7` (before any evidence-only documentation update).
+- [Sprint 03 review evidence run 39044709360](https://github.com/Agents-Foundry/prototypes/actions/runs/39044709360): completed **success**. Evidence job `117431029714` completed **success**; job logs show **48 passed (35.1s)** and `automatedFailures: 0`. Artifact upload step completed successfully.
+- [Sprint 03 design asset integrity run 39044709153](https://github.com/Agents-Foundry/prototypes/actions/runs/39044709153): completed **success**. Integrity job `117431028827` completed **success**; logs say **72 critical-state SVGs and 32 screen concepts** verified.
+- Logs include a Node `DEP0169` `url.parse()` deprecation warning; no failed step was observed. Treat as dependency maintenance follow-up, not a demonstrated vulnerability or test failure.
+- These links establish the stated **automated** outcomes for the original PR44 head only. A new documentation commit requires its own fresh CI check. They do **not** close any manual or independent review gate.
+
+## Verified latest PR44 head CI — 2026-10-17
+
+- Head SHA: `e4f7b7f006062f2cb21df7aeb560d5ae28dd7ec7`. These checks apply to this exact head; any later documentation change requires its own fresh check.
+- [Sprint 03 review evidence run 39058332591](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332591): **success**. [Evidence job 117470831948](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332591/job/117470831948) reports **48 passed (42.5s)** and `automatedFailures: 0`; 291 files uploaded as [artifact 12110665698](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332591/artifacts/12110665698).
+- [Sprint 03 design asset integrity run 39058332588](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332588): **success**. [Integrity job 117470831942](https://github.com/Agents-Foundry/prototypes/actions/runs/39058332588/job/117470831942) verified **72 critical-state SVGs and 32 screen concepts**.
+- Log follow-up (non-failing): Node `DEP0040` (`punycode`), `DEP0169` (`url.parse()`), and GitHub Actions Node.js 20 deprecation/Node.js 24 compatibility warning affecting checkout/setup/upload actions. Review action versions and dependency provenance in a separately scoped maintenance change; these warnings alone are not evidence of a vulnerability or failed check.
+- **Scope boundary:** Automated CI success does not establish actual browser zoom, manual visual QA, screen-reader accessibility, independent security/privacy review, product-owner acceptance or final design freeze. All those gates remain open.
