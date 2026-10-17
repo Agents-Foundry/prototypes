@@ -12,7 +12,7 @@ Four browser tests check policy drift and credential revocation, unreadable offl
 
 Static review of `prototypes/qa-critical-flow.html` identifies that entering `approval-receipt` focuses the generic workflow step heading rather than a receipt-specific heading. The receipt is a dynamically inserted `dl` with an `aria-label`; the polite status message announces simulated approval but does not read the exact action, target, scope and expiry. A keyboard or screen-reader user may not discover those details before choosing Continue. **This is an inspection-derived usability risk, not a confirmed screen-reader defect.**
 
-**Proposed correction for a follow-up design change:** add a distinct visible, programmatically focusable receipt heading; associate the details list with it; move focus to that heading only when the receipt opens; retain explicit Continue/Cancel controls and visible focus styling. Add Playwright focus/semantics checks, then perform real NVDA/VoiceOver review before closing the finding. This PR does not claim to implement that correction.
+**Design correction implemented on this branch (manual validation pending):** the prototype now inserts a visible, programmatically focusable receipt heading, associates the details list with it via `aria-labelledby`, and moves focus to the receipt heading when the receipt opens. Continue and Cancel remain explicit; the heading has visible focus styling in normal, dark, and forced-colors modes. `verification/browser/po41-approval-receipt-focus.spec.cjs` adds three automated focus/semantics regressions. These changes have not been verified by PR CI or a real NVDA/VoiceOver assessor. PO41-01 remains OPEN pending independent/manual validation.
 
 ## Gates remain open
 
