@@ -12,7 +12,7 @@ steps = {
 }
 assert source.count("const detailed={") == 1, "Missing detailed screen catalog"
 assert "function detailedBody(s,step)" in source, "Detailed screen renderer missing"
-assert "let body=detailedBody(s,step)" in source, "Detailed renderer not wired"
+assert "state.mode==='normal'?detailedBody(s,step)" in source, "Detailed renderer not wired to normal mode"
 for slug, screens in steps.items():
     assert f"id:'{slug}'" in source, f"Missing surface: {slug}"
     assert len(screens) == 8
