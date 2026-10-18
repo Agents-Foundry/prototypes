@@ -7,8 +7,8 @@
 
 | Gate | Acceptance criterion | Evidence | Status |
 | --- | --- | --- | --- |
-| Product-specific journeys | All 32 screens expose an interactive, labeled sample input and validation/result feedback | `prototype-gallery/interactive-flows.js`; Playwright 32-screen traversal | Implemented; CI result pending |
-| State behavior | Normal, loading, offline, denied, empty, error, unknown outcome | Gallery scenario selector; Playwright coverage | Implemented; CI result pending |
+| Product-specific journeys | All 32 screens expose an interactive, labeled sample input and validation/result feedback | `prototype-gallery/interactive-flows.js`; Playwright 32-screen traversal | Implemented; CI passed on 2026-10-18 |
+| State behavior | Normal, loading, offline, denied, empty, error, unknown outcome | Gallery scenario selector; Playwright coverage | Implemented; CI passed on 2026-10-18 |
 | Safe operations | No real tenant, member, secret, Jira, agent, publishing or policy mutation | Client-only JavaScript; read-only confirmation text | Source review pending |
 | Browser QA | Desktop and mobile Chromium tests pass | Gallery Browser and Accessibility QA workflow artifact | Not yet verified |
 | Accessibility | No serious/critical WCAG-tagged axe findings in automated scan; keyboard smoke test passes | axe + keyboard Playwright tests | Not yet verified; manual testing outstanding |
