@@ -2,7 +2,8 @@ name: Repository Migration Inventory
 on:
   push:
     branches:
-      - chore/phase2-inventory-execution
+      - main
+      - chore/phase2-main-inventory-and-migration-plan
     paths:
       - 'scripts/inventory_prototypes.py'
       - '.github/workflows/repository-migration-inventory.yml'
