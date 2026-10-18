@@ -41,9 +41,29 @@ def run_case(case='valid'):
                             data['dimensions']['viewportWidth'] = 0
                         elif case == 'boolean-dimension':
                             data['dimensions']['documentWidth'] = True
+                        elif case == 'empty-sha':
+                            data['gitSha'] = ''
+                        elif case == 'numeric-sha':
+                            data['gitSha'] = 123
+                        elif case == 'viewport-mismatch':
+                            data['dimensions']['viewportWidth'] = width + 1
                         elif case == 'nonfinite-dimension':
                             data['dimensions']['documentWidth'] = float('inf')
-                    (evidence / (key + '.json')).write_text(json.dumps(data))
+                        elif case == 'wrong-viewport':
+                            data['dimensions']['viewportWidth'] = width + 1
+                        elif case == 'missing-sha':
+                            data['gitSha'] = ''
+                        elif case == 'numeric-sha':
+                            data['gitSha'] = 123
+                        elif case == 'wrong-id':
+                            data['id'] = 'unexpected-id'
+                        elif case == 'non-object-report':
+                            data = []
+                    if key == TARGET and case == 'null-report':
+                        data = None
+                    elif key == TARGET and case == 'array-report':
+                        data = []
+                    (evidence / (key + '.json')).write_text('{' if key == TARGET and case == 'broken-json' else json.dumps(data))
                     if not (case == 'missing-screenshot' and key == TARGET):
                         (evidence / (key + '.png')).write_bytes(b'fixture')
         env = dict(os.environ, GITHUB_SHA='candidate-sha')
@@ -76,7 +96,9 @@ if __name__ == '__main__':
     for case in (
         'valid', 'sha-mismatch', 'missing-screenshot', 'axe-violation', 'overflow',
         'missing-dimensions', 'string-dimension', 'zero-dimension',
-        'boolean-dimension', 'nonfinite-dimension',
+        'boolean-dimension', 'nonfinite-dimension', 'wrong-viewport',
+        'missing-sha', 'numeric-sha', 'wrong-id', 'non-object-report', 'empty-sha', 'numeric-sha',
+        'viewport-mismatch', 'null-report', 'array-report', 'broken-json',
     ):
         run_case(case)
     print('Evidence index fail-closed contract checks passed')
