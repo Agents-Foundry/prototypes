@@ -140,21 +140,22 @@ function renderRailBadges(){}
 
 /* ---------- events ---------- */
 function parseVal(v){return v==='true'?true:v==='false'?false:v}
+function put(key,val){if(key[0]==='$'){const parts=key.slice(1).split('.');let o=shared;for(let i=0;i<parts.length-1;i++){o=o[parts[i]]=o[parts[i]]||{}}o[parts[parts.length-1]]=val}else store[cur][key]=val}
 function onClick(e){
   const t=e.target.closest('[data-go],[data-set],[data-sim],[data-retry],[data-back],[data-act]');
   if(!t||t.disabled)return;
   if(t.hasAttribute('data-act')){const [n,...r]=t.dataset.act.split(':');const sc=cfg.screens[cur];if(sc.act)sc.act(n,r.join(':').split(','),makeCtx());render();return}
   if(t.hasAttribute('data-go')){e.preventDefault();go(t.dataset.go);return}
-  if(t.hasAttribute('data-set')){const [k,...r]=t.dataset.set.split('=');store[cur][k]=parseVal(r.join('='));render();return}
+  if(t.hasAttribute('data-set')){const [k,...r]=t.dataset.set.split('=');put(k,parseVal(r.join('=')));render();return}
   if(t.hasAttribute('data-sim')){sim({title:t.dataset.title||'Simulated action',message:t.dataset.sim,risk:t.dataset.risk,confirmText:t.dataset.confirm,after:t.dataset.after});return}
   if(t.hasAttribute('data-retry')){scenario='normal';render();return}
   if(t.hasAttribute('data-back')){history.back();return}
 }
-function onInput(e){const t=e.target;if(t.dataset&&t.dataset.bind&&t.type!=='checkbox'&&t.tagName!=='SELECT'){store[cur][t.dataset.bind]=t.value;render()}}
+function onInput(e){const t=e.target;if(t.dataset&&t.dataset.bind&&t.type!=='checkbox'&&t.tagName!=='SELECT'){put(t.dataset.bind,t.value);render()}}
 function onChange(e){const t=e.target;
-  if(t.dataset&&t.dataset.bind&&t.tagName==='SELECT'){store[cur][t.dataset.bind]=t.value;render()}
-  else if(t.dataset&&t.dataset.bind&&t.type==='checkbox'){store[cur][t.dataset.bind]=t.checked;render()}
-  else if(t.dataset&&t.dataset.toggle){store[cur][t.dataset.toggle]=t.checked;render()}}
+  if(t.dataset&&t.dataset.bind&&t.tagName==='SELECT'){put(t.dataset.bind,t.value);render()}
+  else if(t.dataset&&t.dataset.bind&&t.type==='checkbox'){put(t.dataset.bind,t.checked);render()}
+  else if(t.dataset&&t.dataset.toggle){put(t.dataset.toggle,t.checked);render()}}
 function onKey(e){
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openPalette();return}
   if(e.key==='Escape'){if($('#overlay').innerHTML){closeOverlay();return}if(store[cur]&&(store[cur].open||store[cur].drawer)){store[cur].open='';store[cur].drawer='';render()}}
@@ -174,7 +175,7 @@ function sim(o){
   const box=$('#overlay .modal');trap(box);
   const ok=$('#mo');$('#mc').onclick=closeOverlay;
   if(need)$('#cf').addEventListener('input',e=>{ok.disabled=e.target.value!==need});
-  ok.onclick=()=>{simLog.push({t:new Date().toLocaleTimeString(),title:o.title,msg:o.message});closeOverlay();toast(`Simulated: ${o.message||o.title}. No real action occurred.`);if(o.after){store[cur][o.after.split('=')[0]]=parseVal(o.after.split('=')[1]||'');render()}};
+  ok.onclick=()=>{simLog.push({t:new Date().toLocaleTimeString(),title:o.title,msg:o.message});closeOverlay();toast(`Simulated: ${o.message||o.title}. No real action occurred.`);if(o.after){put(o.after.split('=')[0],parseVal(o.after.split('=').slice(1).join('=')||''));render()}};
   (need?$('#cf'):ok).focus();
 }
 function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;$('#toasts').append(t);setTimeout(()=>t.remove(),4500)}
