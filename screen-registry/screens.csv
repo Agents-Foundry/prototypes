@@ -1,0 +1,100 @@
+id,surface,title,group,source,origin,status
+EMP-001,Employee Desktop,Sign in & organization,Access,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-002,Employee Desktop,Workspace,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-003,Employee Desktop,Conversation · Nova,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-004,Employee Desktop,Run plan & progress,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-005,Employee Desktop,Tool permission request,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-006,Employee Desktop,Accounts & vault,Account,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-007,Employee Desktop,Jira work · QA-184,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-008,Employee Desktop,Browser & test execution,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-009,Employee Desktop,Artifacts & evidence,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-010,Employee Desktop,Repository context,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-011,Employee Desktop,"Skills, tools & connectors",Agents,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-012,Employee Desktop,Notifications & approvals,Work,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-013,Employee Desktop,History & search,Library,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
+EMP-014,Employee Desktop,Environment manager,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
+EMP-015,Employee Desktop,Settings & privacy,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
+EMP-016,Employee Desktop,Recovery & offline workspace,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
+EMP-017,Employee Desktop,Welcome,Access,employee-desktop/app/screens-3.js,new,proposed
+EMP-018,Employee Desktop,My agents,Agents,employee-desktop/app/screens-3.js,new,proposed
+EMP-019,Employee Desktop,New task,Work,employee-desktop/app/screens-4.js,new,proposed
+EMP-020,Employee Desktop,Defect draft & publish review,Evidence,employee-desktop/app/screens-4.js,new,proposed
+EMP-021,Employee Desktop,Run report,Evidence,employee-desktop/app/screens-4.js,new,proposed
+EMP-022,Employee Desktop,Code change review,Evidence,employee-desktop/app/screens-4.js,new,proposed
+EMP-023,Employee Desktop,Memory,Agents,employee-desktop/app/screens-4.js,new,proposed
+EMP-024,Employee Desktop,Support & diagnostics,Account,employee-desktop/app/screens-4.js,new,proposed
+ORG-001,Organization Admin,Admin sign-in,Access,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-002,Organization Admin,Setup guide,Overview,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-003,Organization Admin,Organization details,Organization,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-004,Organization Admin,Dashboard,Overview,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-005,Organization Admin,Teams & departments,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-006,Organization Admin,Roles & positions,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-007,Organization Admin,AI employees,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-008,Organization Admin,Hire: choose a blueprint,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-009,Organization Admin,Hire: configure,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-010,Organization Admin,Hire: capabilities,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-011,Organization Admin,Hire: integrations,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-012,Organization Admin,Hire: review & activate,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-013,Organization Admin,Hire: activation result,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-014,Organization Admin,People & invitations,Workforce,organization-admin/app/screens-3.js,new,proposed
+ORG-015,Organization Admin,Permissions & effective access,Governance,organization-admin/app/screens-3.js,new,proposed
+ORG-016,Organization Admin,Identity & SSO,Organization,organization-admin/app/screens-3.js,new,proposed
+ORG-017,Organization Admin,Connectors,Governance,organization-admin/app/screens-3.js,new,proposed
+ORG-018,Organization Admin,Models & keys,Governance,organization-admin/app/screens-3.js,new,proposed
+ORG-019,Organization Admin,Governance policies,Governance,organization-admin/app/screens-3.js,new,proposed
+ORG-020,Organization Admin,Approvals,Overview,organization-admin/app/screens-3.js,new,proposed
+ORG-021,Organization Admin,AI employee · QA Engineer · Nova,Workforce,organization-admin/app/screens-4.js,new,proposed
+ORG-022,Organization Admin,Usage & spend,Insight,organization-admin/app/screens-4.js,new,proposed
+ORG-023,Organization Admin,Access reviews,Governance,organization-admin/app/screens-4.js,new,proposed
+ORG-024,Organization Admin,Audit log,Insight,organization-admin/app/screens-4.js,new,proposed
+ORG-025,Organization Admin,Data & privacy,Organization,organization-admin/app/screens-4.js,new,proposed
+ORG-026,Organization Admin,Plan & settings,Organization,organization-admin/app/screens-4.js,new,proposed
+ORG-027,Organization Admin,Emergency controls,Organization,organization-admin/app/screens-4.js,new,proposed
+PLT-001,Platform Owner,Operator sign-in,Access,platform-owner/app/screens-1.js,redesign of legacy ID,proposed
+PLT-002,Platform Owner,Platform overview,Overview,platform-owner/app/screens-1.js,redesign of legacy ID,proposed
+PLT-003,Platform Owner,Organizations,Organizations,platform-owner/app/screens-1.js,redesign of legacy ID,proposed
+PLT-004,Platform Owner,Organization profile,Organizations,platform-owner/app/screens-1.js,redesign of legacy ID,proposed
+PLT-005,Platform Owner,Provision a tenant,Organizations,platform-owner/app/screens-1.js,redesign of legacy ID,proposed
+PLT-006,Platform Owner,Provisioning review & approval,Organizations,platform-owner/app/screens-1.js,redesign of legacy ID,proposed
+PLT-007,Platform Owner,Tenant invitation & handoff,Organizations,platform-owner/app/screens-2.js,redesign of legacy ID,proposed
+PLT-008,Platform Owner,Plans & entitlements,Commercial,platform-owner/app/screens-2.js,redesign of legacy ID,proposed
+PLT-009,Platform Owner,Billing operations,Commercial,platform-owner/app/screens-2.js,redesign of legacy ID,proposed
+PLT-010,Platform Owner,Usage & spending,Commercial,platform-owner/app/screens-2.js,redesign of legacy ID,proposed
+PLT-011,Platform Owner,Global blueprint catalog,Agent catalog,platform-owner/app/screens-2.js,redesign of legacy ID,proposed
+PLT-012,Platform Owner,Blueprint rollout management,Agent catalog,platform-owner/app/screens-2.js,redesign of legacy ID,proposed
+PLT-013,Platform Owner,Security posture,Governance,platform-owner/app/screens-3.js,redesign of legacy ID,proposed
+PLT-014,Platform Owner,Platform audit explorer,Governance,platform-owner/app/screens-3.js,redesign of legacy ID,proposed
+PLT-015,Platform Owner,Provider & integration health,Operations,platform-owner/app/screens-3.js,redesign of legacy ID,proposed
+PLT-016,Platform Owner,Incident center,Overview,platform-owner/app/screens-3.js,redesign of legacy ID,proposed
+PLT-017,Platform Owner,Support cases,Operations,platform-owner/app/screens-3.js,redesign of legacy ID,proposed
+PLT-018,Platform Owner,Time-boxed support access,Operations,platform-owner/app/screens-3.js,redesign of legacy ID,proposed
+PLT-019,Platform Owner,Policy template management,Governance,platform-owner/app/screens-4.js,redesign of legacy ID,proposed
+PLT-020,Platform Owner,Platform staff & roles,Governance,platform-owner/app/screens-4.js,redesign of legacy ID,proposed
+PLT-021,Platform Owner,Operator settings,Settings,platform-owner/app/screens-4.js,redesign of legacy ID,proposed
+PLT-022,Platform Owner,Tenant suspension & termination review,Organizations,platform-owner/app/screens-4.js,redesign of legacy ID,proposed
+PLT-023,Platform Owner,Regions & data residency,Operations,platform-owner/app/screens-5.js,new,proposed
+PLT-024,Platform Owner,Feature flags & release trains,Operations,platform-owner/app/screens-5.js,new,proposed
+PLT-025,Platform Owner,Connector vetting,Agent catalog,platform-owner/app/screens-5.js,new,proposed
+PLT-026,Platform Owner,Model providers,Agent catalog,platform-owner/app/screens-5.js,new,proposed
+PLT-027,Platform Owner,Compliance & data requests,Governance,platform-owner/app/screens-5.js,new,proposed
+PLT-028,Platform Owner,Status & maintenance,Overview,platform-owner/app/screens-5.js,new,proposed
+STD-001,Agent Studio,Sign in & workspace selection,Access,agent-studio/app/screens-1.js,new,proposed
+STD-002,Agent Studio,Blueprint catalog,Blueprints,agent-studio/app/screens-1.js,new,proposed
+STD-003,Agent Studio,Create blueprint,Blueprints,agent-studio/app/screens-1.js,new,proposed
+STD-004,Agent Studio,QA Engineer · overview,Blueprints,agent-studio/app/screens-1.js,new,proposed
+STD-005,Agent Studio,Instructions & persona,Build,agent-studio/app/screens-1.js,new,proposed
+STD-006,Agent Studio,Tools & skills,Build,agent-studio/app/screens-1.js,new,proposed
+STD-007,Agent Studio,Knowledge & memory,Build,agent-studio/app/screens-2.js,new,proposed
+STD-008,Agent Studio,Model & policies,Build,agent-studio/app/screens-2.js,new,proposed
+STD-009,Agent Studio,Autonomy & approvals matrix,Build,agent-studio/app/screens-2.js,new,proposed
+STD-010,Agent Studio,Test playground,Validate,agent-studio/app/screens-2.js,new,proposed
+STD-011,Agent Studio,Evaluation suites,Validate,agent-studio/app/screens-2.js,new,proposed
+STD-012,Agent Studio,Evaluation run detail,Validate,agent-studio/app/screens-2.js,new,proposed
+STD-013,Agent Studio,Version history & diff,Validate,agent-studio/app/screens-2.js,new,proposed
+STD-014,Agent Studio,Review queue,Release,agent-studio/app/screens-3.js,new,proposed
+STD-015,Agent Studio,Review & decision,Release,agent-studio/app/screens-3.js,new,proposed
+STD-016,Agent Studio,Publish & rollout,Release,agent-studio/app/screens-3.js,new,proposed
+STD-017,Agent Studio,Rollback & deprecation,Release,agent-studio/app/screens-3.js,new,proposed
+STD-018,Agent Studio,Usage & feedback,Insight & admin,agent-studio/app/screens-3.js,new,proposed
+STD-019,Agent Studio,Custom skills,Insight & admin,agent-studio/app/screens-3.js,new,proposed
+STD-020,Agent Studio,Studio settings & access,Insight & admin,agent-studio/app/screens-3.js,new,proposed

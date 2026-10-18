@@ -20,14 +20,14 @@ const ui={
   kv:(pairs)=>`<dl class="kv">${pairs.map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>`,
   list:(items)=>`<ul class="list">${items.map(i=>`<li>${i.lead||''}<div class="grow"><div>${i.title||''}</div>${i.sub?`<small class="muted">${i.sub}</small>`:''}</div>${i.right||''}</li>`).join('')}</ul>`,
   notice:(tone,title,text)=>`<div class="notice ${tone}" ${tone==='bad'?'role="alert"':'role="status"'}><div>${title?`<b>${title}</b>`:''}${text||''}</div></div>`,
-  progress:(pct,tone='')=>`<div class="progress ${tone}" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>`,
+  progress:(pct,tone='',label='')=>`<div class="progress ${tone}" role="progressbar" aria-label="${esc(label||Math.round(pct)+'% complete')}" aria-valuenow="${Math.round(pct)}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>`,
   bars:(vals,label='Trend')=>{const m=Math.max(...vals,1);return `<div class="bars" role="img" aria-label="${esc(label)}: ${vals.join(', ')}">${vals.map(v=>`<i style="height:${Math.max(4,v/m*100)}%"></i>`).join('')}</div>`},
   switch:(label,key,on,o={})=>`<label class="switch"><input type="checkbox" data-toggle="${key}" ${on?'checked':''} ${o.write===false?'':'data-write'}><span class="tr"></span><span>${label}</span></label>`,
   timeline:(items)=>`<ol class="timeline">${items.map(i=>`<li class="${i.tone||''}"><div><b>${i.title}</b></div>${i.sub?`<small class="muted">${i.sub}</small>`:''}</li>`).join('')}</ol>`,
   avatar:(t,agent)=>`<span class="avatar ${agent?'agent':''}" aria-hidden="true">${esc(t)}</span>`,
   drawer:(title,body,closeKey)=>`<aside class="drawer" role="dialog" aria-modal="false" aria-label="${esc(title)}"><div class="toolbar"><h2 class="grow">${title}</h2><button class="btn sm" type="button" data-set="${closeKey}=">Close</button></div>${body}</aside>`,
   empty:(title,text,action='')=>`<div class="empty"><h3>${title}</h3><p>${text}</p>${action?`<div style="margin-top:14px">${action}</div>`:''}</div>`,
-  diff:(lines)=>`<div class="diff" role="group" aria-label="Code diff">${lines.map(l=>`<div class="${l[0]==='+'?'a':l[0]==='-'?'r':l[0]==='@'?'h':''}">${esc(l)}</div>`).join('')}</div>`,
+  diff:(lines)=>`<div class="diff" role="group" aria-label="Code diff" tabindex="0">${lines.map(l=>`<div class="${l[0]==='+'?'a':l[0]==='-'?'r':l[0]==='@'?'h':''}">${esc(l)}</div>`).join('')}</div>`,
   chips:(arr,tone='')=>`<span class="chips">${arr.map(x=>`<span class="badge ${tone}">${x}</span>`).join('')}</span>`,
   risk:(r)=>`<span class="risk-${r==='High'?'high':r==='Medium'?'med':'low'}">● ${r}</span>`
 };
