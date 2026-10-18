@@ -11,7 +11,7 @@ import re
 from pathlib import Path
 
 SHA256 = re.compile(r'[0-9a-f]{64}\Z')
-GIT_SHA = re.compile(r'[0-9a-fA-F]{40}\\Z')
+GIT_SHA = re.compile(r'[0-9a-fA-F]{40}\Z')
 STATES = ('initial', 'permission', 'denied', 'expired', 'revoked', 'offline', 'reconnected', 'unknown')
 EXPECTED = {f'{theme}-{width}-{state}' for theme in ('light', 'dark')
             for width in (480, 960, 1440) for state in STATES}
