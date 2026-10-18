@@ -1,5 +1,11 @@
 name: Sprint 03 review evidence
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'employee-desktop/sprint-03/**'
+      - '.github/workflows/sprint-03-review-evidence.yml'
   pull_request:
     paths:
       - 'employee-desktop/sprint-03/**'
