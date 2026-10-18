@@ -1,0 +1,43 @@
+name: Mockup Coverage Reconciliation
+on:
+  push:
+    branches: [main, feat/mockup-coverage-reconciliation]
+    paths:
+      - 'scripts/inventory_prototypes.py'
+      - 'scripts/reconcile_mockup_coverage.py'
+      - '.github/workflows/mockup-coverage.yml'
+      - 'prototype-gallery/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inventory and reconcile
+        run: |
+          python scripts/inventory_prototypes.py --output repository-inventory.json
+          python scripts/reconcile_mockup_coverage.py --inventory repository-inventory.json --output-dir coverage-output
+      - name: Publish summary
+        run: |
+          python - <<'PY'
+          import json,os
+          s=json.load(open("coverage-output/summary.json",encoding="utf-8"))
+          with open(os.environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as f:
+              f.write("## Mockup coverage\n\n")
+              f.write(f"- Gallery concept screens: {s['illustrative_gallery_screens']}\n")
+              f.write(f"- Design candidate paths for manual review: {s['design_candidate_paths']}\n")
+              f.write("- Approved screen count: **unknown**\n- Pending mockups: **unknown**\n")
+              f.write(f"- Inventory commit: \`{s['inventory_commit']}\`\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mockup-coverage
+          path: |
+            coverage-output/
+            repository-inventory.json
+          retention-days: 30
