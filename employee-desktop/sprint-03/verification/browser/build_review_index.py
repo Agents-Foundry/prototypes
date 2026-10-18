@@ -35,15 +35,17 @@ def main():
                 if report.is_file():
                     try:
                         data = json.loads(report.read_text(encoding='utf-8'))
-                        entry['sourceSha'] = data.get('gitSha')
-                        if data.get('id') != key or data.get('simulated') is not True or not isinstance(data.get('gitSha'), str):
+                        if not isinstance(data, dict):
+                            raise ValueError('Report must be a JSON object')
+                        entry['sourceSha'] = data.get('gitSha') if isinstance(data.get('gitSha'), str) else None
+                        if data.get('id') != key or data.get('simulated') is not True or not isinstance(data.get('gitSha'), str) or not data.get('gitSha').strip():
                             entry['automatedStatus'] = 'INVALID'
                         else:
                             violations = data.get('axeViolations')
                             dimensions = data.get('dimensions', {})
                             viewport = dimensions.get('viewportWidth') if isinstance(dimensions, dict) else None
                             document = dimensions.get('documentWidth') if isinstance(dimensions, dict) else None
-                            valid_dimensions = all(type(value) in (int, float) and math.isfinite(value) and value > 0 for value in (viewport, document))
+                            valid_dimensions = all(type(value) in (int, float) and math.isfinite(value) and value > 0 for value in (viewport, document)) and viewport == width
                             if not isinstance(violations, list) or not valid_dimensions:
                                 entry['automatedStatus'] = 'INVALID'
                             else:
