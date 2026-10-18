@@ -139,7 +139,7 @@ function render(nav){
 function renderRailBadges(){}
 
 /* ---------- events ---------- */
-function parseVal(v){return v==='true'?true:v==='false'?false:v}
+function parseVal(v){return v==='true'?true:v==='false'?false:/^-?\d+$/.test(v)?Number(v):v}
 function put(key,val){if(key[0]==='$'){const parts=key.slice(1).split('.');let o=shared;for(let i=0;i<parts.length-1;i++){o=o[parts[i]]=o[parts[i]]||{}}o[parts[parts.length-1]]=val}else store[cur][key]=val}
 function onClick(e){
   const t=e.target.closest('[data-go],[data-set],[data-sim],[data-retry],[data-back],[data-act]');
