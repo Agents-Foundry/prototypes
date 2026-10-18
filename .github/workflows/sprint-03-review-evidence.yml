@@ -23,6 +23,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+      - name: Verify review index SHA contract
+        run: python3 test_review_index_contract.py
       - name: Run review evidence matrix
         run: npx playwright test review-evidence.spec.cjs pr48-negative-paths.spec.cjs pr49-recovery-idempotency.spec.cjs pr50-authorization-accessibility.spec.cjs pr51-recovery-reflow.spec.cjs
       - name: Build coverage index (fail on missing or failed evidence)
