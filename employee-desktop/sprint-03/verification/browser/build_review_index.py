@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Generate a non-approval evidence index from Playwright JSON files."""
 import argparse
+import hashlib
 import html
 import json
 import math
@@ -25,7 +26,12 @@ def main():
                 report = args.evidence / (key + '.json')
                 screenshot = args.evidence / (key + '.png')
                 entry = {'id': key, 'reportExists': report.is_file(), 'screenshotExists': screenshot.is_file(),
-                         'automatedStatus': 'MISSING', 'violations': None, 'sourceSha': None}
+                         'automatedStatus': 'MISSING', 'violations': None, 'sourceSha': None,
+                         'reportSha256': None, 'screenshotSha256': None}
+                if report.is_file():
+                    entry['reportSha256'] = hashlib.sha256(report.read_bytes()).hexdigest()
+                if screenshot.is_file():
+                    entry['screenshotSha256'] = hashlib.sha256(screenshot.read_bytes()).hexdigest()
                 if report.is_file():
                     try:
                         data = json.loads(report.read_text(encoding='utf-8'))
