@@ -16,6 +16,25 @@ const el=id=>document.getElementById(id);
 const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function btn(label,fn,secondary=false){return '<button class="btn '+(secondary?'secondary':'')+'" data-action="'+fn+'">'+escapeHtml(label)+'</button>'}
 const detailed={
+platform:{
+'Overview':{intro:'SaaS-wide operations, tenant health and actionable alerts',rows:['Active organizations · 24 (sample)','Pending provisioning · 2 requests','Security review · 3 policy exceptions'],action:'Explore organizations'},
+'Organizations directory':{intro:'Search and inspect tenant lifecycle and ownership',rows:['Codifyd · Active · India region','Northstar Labs · Trial · EU region','Helix Systems · Suspended · Review required'],action:'Inspect tenant'},
+'Organization details':{intro:'Review tenant identity, region, owner and effective controls',rows:['Tenant · Codifyd (sample)','Data region · India (illustrative)','Owner contact · Hidden in prototype'],action:'Review configuration'},
+'Tenant provisioning':{intro:'Stage tenant creation with isolation and policy gates',rows:['Organization slug · codifyd-demo','Region · Explicit selection required','Provisioning state · Pending confirmation'],action:'Simulate provisioning review'},
+'Subscription and usage':{intro:'Monitor plan limits and usage without exposing billing secrets',rows:['Plan · Team (example)','Model usage · 68% of simulated allowance','Quota change · Requires authorized review'],action:'Review quota'},
+'Platform health':{intro:'Inspect aggregate system health and incident impact',rows:['Control plane · Healthy (simulated)','Agent runtime · Elevated latency (sample)','Connector health · 1 degraded integration'],action:'Inspect incident'},
+'Governance review':{intro:'Review platform-wide exceptions and privileged actions',rows:['Policy exception · 2 pending','Scope · Tenant-specific, time bounded','Reviewer · Independent approval required'],action:'Inspect governance item'},
+'Audit and incidents':{intro:'Trace platform changes, incidents and recovery decisions',rows:['Audit record · Tenant settings updated','Incident · Connector timeout (sample)','Export · Restricted to authorized roles'],action:'Review audit trail'}},
+admin:{
+'Organization overview':{intro:'Organization readiness, active teams and agent adoption',rows:['Departments · 8 (sample)','Members · 126 (sample)','Pending invitations · 4'],action:'Manage organization'},
+'Departments and teams':{intro:'Manage hierarchy and team ownership within tenant boundaries',rows:['Engineering → QA · 12 members','Engineering → Frontend · 18 members','Operations → IT · 7 members'],action:'Review team structure'},
+'Members and invitations':{intro:'Invite, suspend and assign members with explicit scope',rows:['Invitation · qa.lead@example.invalid · Pending','Member · Alex (sample) · Active','Deactivation · Requires confirmation'],action:'Review invitation'},
+'Roles and permissions':{intro:'Compare effective permissions and avoid privilege escalation',rows:['Org Admin · Tenant configuration','Team Lead · Team-scoped assignments','Employee · Assigned agents only'],action:'Inspect permission diff'},
+'Agent assignment':{intro:'Assign approved agent versions to authorized teams',rows:['QA Engineer v2 · QA team · Draft','Frontend Engineer v1 · Frontend team · Published','Release Assistant v3 · Operations · Review'],action:'Review assignment'},
+'Model and key settings':{intro:'Configure provider routing while protecting credentials',rows:['Organization provider · OpenAI / Anthropic (sample)','Employee BYOK · Policy controlled','API secrets · Never displayed or stored in demo'],action:'Review provider policy'},
+'Access review':{intro:'Audit membership and privileged access before approval',rows:['Stale memberships · 2 flagged','External collaborators · 1 pending review','Privileged grants · Fresh authorization required'],action:'Simulate access review'},
+'Organization audit':{intro:'Inspect tenant-scoped changes and export permissions',rows:['Member invited · Simulated event','Agent assignment changed · Simulated event','Audit export · Restricted and logged'],action:'Inspect audit event'}}
+,
 employee:{
 'Workspace':{intro:'Your assigned agents and work queues',rows:['QA Agent · Regression checklist · Ready','Developer Agent · Review task · In progress','Release Agent · Sanity plan · Awaiting input'],action:'Create task'},
 'Agent catalog':{intro:'Discover assigned agents and their allowed capabilities',rows:['QA Engineer · Jira, Playwright · Enabled','Frontend Engineer · Git and review · Enabled','Release Assistant · Checklist · Restricted'],action:'Select QA Engineer'},
