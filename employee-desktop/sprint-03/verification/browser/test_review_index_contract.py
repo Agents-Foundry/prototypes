@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed contract checks for the Sprint 03 simulated evidence index."""
 import json
+import hashlib
 import os
 import subprocess
 import sys
@@ -57,6 +58,10 @@ def run_case(case='valid'):
         assert summary['expectedSourceSha'] == 'candidate-sha'
         assert summary['evidenceType'] == 'SIMULATED_AUTOMATED_BROWSER_ONLY'
         entry = next(e for e in index['entries'] if e['id'] == TARGET)
+        target_report = evidence / (TARGET + '.json')
+        target_screenshot = evidence / (TARGET + '.png')
+        assert entry['reportSha256'] == hashlib.sha256(target_report.read_bytes()).hexdigest()
+        assert entry['screenshotSha256'] == (hashlib.sha256(target_screenshot.read_bytes()).hexdigest() if target_screenshot.is_file() else None)
         if case == 'valid':
             assert result.returncode == 0, result.stderr + result.stdout
             assert summary['automatedPass'] == 48
