@@ -3,6 +3,7 @@
 import argparse
 import html
 import json
+import math
 import os
 from pathlib import Path
 
@@ -34,11 +35,14 @@ def main():
                         else:
                             violations = data.get('axeViolations')
                             dimensions = data.get('dimensions', {})
-                            if not isinstance(violations, list):
+                            viewport = dimensions.get('viewportWidth') if isinstance(dimensions, dict) else None
+                            document = dimensions.get('documentWidth') if isinstance(dimensions, dict) else None
+                            valid_dimensions = all(type(value) in (int, float) and math.isfinite(value) and value > 0 for value in (viewport, document))
+                            if not isinstance(violations, list) or not valid_dimensions:
                                 entry['automatedStatus'] = 'INVALID'
                             else:
                                 entry['violations'] = len(violations)
-                                overflow = dimensions.get('documentWidth', 1e12) > dimensions.get('viewportWidth', 0)
+                                overflow = document > viewport
                                 entry['automatedStatus'] = 'FAIL' if violations or overflow else 'PASS'
                     except (ValueError, TypeError, OSError):
                         entry['automatedStatus'] = 'INVALID'

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Self-contained contract checks for the Sprint 03 evidence index builder."""
+"""Fail-closed contract checks for the Sprint 03 simulated evidence index."""
 import json
 import os
 import subprocess
@@ -8,8 +8,9 @@ import tempfile
 from pathlib import Path
 
 SCRIPT = Path(__file__).with_name('build_review_index.py')
+TARGET = 'light-480-initial'
 
-def run_case(mismatch=False, missing_screenshot=False, axe_violation=False, horizontal_overflow=False):
+def run_case(case='valid'):
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         evidence = root / 'evidence'
@@ -19,35 +20,58 @@ def run_case(mismatch=False, missing_screenshot=False, axe_violation=False, hori
             for width in (480, 960, 1440):
                 for state in ('initial', 'permission', 'denied', 'expired', 'revoked', 'offline', 'reconnected', 'unknown'):
                     key = f'{theme}-{width}-{state}'
-                    sha = 'wrong-sha' if mismatch and key == 'light-480-initial' else 'candidate-sha'
-                    violations = [{'id': 'fixture-violation'}] if axe_violation and key == 'light-480-initial' else []
-                    document_width = width + 1 if horizontal_overflow and key == 'light-480-initial' else width
-                    (evidence / (key + '.json')).write_text(json.dumps({
-                        'id': key, 'simulated': True, 'gitSha': sha,
-                        'axeViolations': violations, 'dimensions': {'viewportWidth': width, 'documentWidth': document_width}
-                    }))
-                    if not (missing_screenshot and key == 'light-480-initial'):
+                    data = {
+                        'id': key, 'simulated': True, 'gitSha': 'candidate-sha',
+                        'axeViolations': [],
+                        'dimensions': {'viewportWidth': width, 'documentWidth': width},
+                    }
+                    if key == TARGET:
+                        if case == 'sha-mismatch':
+                            data['gitSha'] = 'wrong-sha'
+                        elif case == 'axe-violation':
+                            data['axeViolations'] = [{'id': 'fixture-violation'}]
+                        elif case == 'overflow':
+                            data['dimensions']['documentWidth'] = width + 1
+                        elif case == 'missing-dimensions':
+                            del data['dimensions']
+                        elif case == 'string-dimension':
+                            data['dimensions']['documentWidth'] = 'not-a-number'
+                        elif case == 'zero-dimension':
+                            data['dimensions']['viewportWidth'] = 0
+                        elif case == 'boolean-dimension':
+                            data['dimensions']['documentWidth'] = True
+                        elif case == 'nonfinite-dimension':
+                            data['dimensions']['documentWidth'] = float('inf')
+                    (evidence / (key + '.json')).write_text(json.dumps(data))
+                    if not (case == 'missing-screenshot' and key == TARGET):
                         (evidence / (key + '.png')).write_bytes(b'fixture')
         env = dict(os.environ, GITHUB_SHA='candidate-sha')
-        result = subprocess.run([sys.executable, str(SCRIPT), '--evidence', str(evidence),
-                                 '--output', str(output)], env=env, capture_output=True, text=True)
-        index = json.loads((output / 'index.json').read_text())
-        assert index['summary']['expectedSourceSha'] == 'candidate-sha'
-        assert index['summary']['evidenceType'] == 'SIMULATED_AUTOMATED_BROWSER_ONLY'
-        if mismatch or missing_screenshot or axe_violation or horizontal_overflow:
-            assert result.returncode != 0, result.stdout
-            if axe_violation or horizontal_overflow:
-                assert index['summary']['automatedFailures'] >= 1
-            else:
-                assert index['summary']['missingOrInvalid'] >= 1
-        else:
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), '--evidence', str(evidence), '--output', str(output)],
+            env=env, capture_output=True, text=True,
+        )
+        index_path = output / 'index.json'
+        assert index_path.is_file(), f'{case}: index not written: {result.stderr}'
+        index = json.loads(index_path.read_text())
+        summary = index['summary']
+        assert summary['expectedSourceSha'] == 'candidate-sha'
+        assert summary['evidenceType'] == 'SIMULATED_AUTOMATED_BROWSER_ONLY'
+        entry = next(e for e in index['entries'] if e['id'] == TARGET)
+        if case == 'valid':
             assert result.returncode == 0, result.stderr + result.stdout
-            assert index['summary']['automatedPass'] == 48
+            assert summary['automatedPass'] == 48
+            assert entry['automatedStatus'] == 'PASS'
+        else:
+            assert result.returncode != 0, f'{case}: expected failure'
+            expected_status = 'FAIL' if case in ('axe-violation', 'overflow') else 'MISSING' if case == 'missing-screenshot' else 'INVALID'
+            assert entry['automatedStatus'] == expected_status, f'{case}: {entry}'
+            assert summary['automatedPass'] == 47, f'{case}: {summary}'
 
 if __name__ == '__main__':
-    run_case(False)
-    run_case(True)
-    run_case(missing_screenshot=True)
-    run_case(axe_violation=True)
-    run_case(horizontal_overflow=True)
-    print('Evidence-index SHA contract checks passed')
+    for case in (
+        'valid', 'sha-mismatch', 'missing-screenshot', 'axe-violation', 'overflow',
+        'missing-dimensions', 'string-dimension', 'zero-dimension',
+        'boolean-dimension', 'nonfinite-dimension',
+    ):
+        run_case(case)
+    print('Evidence index fail-closed contract checks passed')
