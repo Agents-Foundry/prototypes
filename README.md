@@ -2,6 +2,21 @@
 
 > **Design-first workspace, not a production application.** This repository is where the team explores, specifies, challenges, and validates the intended Agents Foundry product experience before implementation. A working prototype or passing automated check is **not** evidence of product-owner acceptance, independent security/privacy approval, accessibility approval, or design freeze.
 
+## Explore by application
+
+**Start with the product, not the sprint.** Choose a surface below, then follow its journeys, specifications and evidence.
+
+| Application | Team guide | Clickable concept |
+| --- | --- | --- |
+| Platform Owner | [Open guide](platform-owner/README.md) | [Launch gallery](prototype-gallery/index.html) |
+| Organization Admin | [Open guide](organization-admin/README.md) | [Launch gallery](prototype-gallery/index.html) |
+| Employee Desktop | [Open guide](employee-desktop/README.md) | [Launch gallery](prototype-gallery/index.html) |
+| Agent Studio | [Open guide](agent-studio/README.md) | [Launch gallery](prototype-gallery/index.html) |
+
+[Documentation index](docs/README.md) · [Canonical folder organization and safe migration plan](docs/repository-organization.md)
+
+**Cleanup status:** Product-first landing pages are in place on this branch. Legacy sprint directories have not been moved or deleted; a complete dependency inventory is required first.
+
 ## Start here
 
 | You are… | Start with | Your goal |
