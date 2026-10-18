@@ -3,6 +3,7 @@
 import argparse
 import html
 import json
+import os
 from pathlib import Path
 
 STATES = ('initial', 'permission', 'denied', 'expired', 'revoked', 'offline', 'reconnected', 'unknown')
@@ -23,11 +24,12 @@ def main():
                 report = args.evidence / (key + '.json')
                 screenshot = args.evidence / (key + '.png')
                 entry = {'id': key, 'reportExists': report.is_file(), 'screenshotExists': screenshot.is_file(),
-                         'automatedStatus': 'MISSING', 'violations': None}
+                         'automatedStatus': 'MISSING', 'violations': None, 'sourceSha': None}
                 if report.is_file():
                     try:
                         data = json.loads(report.read_text(encoding='utf-8'))
-                        if data.get('id') != key or data.get('simulated') is not True:
+                        entry['sourceSha'] = data.get('gitSha')
+                        if data.get('id') != key or data.get('simulated') is not True or not isinstance(data.get('gitSha'), str):
                             entry['automatedStatus'] = 'INVALID'
                         else:
                             violations = data.get('axeViolations')
@@ -43,10 +45,18 @@ def main():
                 if not screenshot.is_file() and entry['automatedStatus'] == 'PASS':
                     entry['automatedStatus'] = 'MISSING'
                 entries.append(entry)
-    summary = {'expected': len(entries), 'captured': sum(x['reportExists'] and x['screenshotExists'] for x in entries),
+    source_shas = sorted({x['sourceSha'] for x in entries if x['sourceSha']})
+    expected_sha = os.environ.get('GITHUB_SHA')
+    if expected_sha and any(x['sourceSha'] != expected_sha for x in entries):
+        for entry in entries:
+            if entry['sourceSha'] != expected_sha:
+                entry['automatedStatus'] = 'INVALID'
+    summary = {'expectedSourceSha': expected_sha or 'local-unpinned', 'observedSourceShas': source_shas,
+               'expected': len(entries), 'captured': sum(x['reportExists'] and x['screenshotExists'] for x in entries),
                'automatedPass': sum(x['automatedStatus'] == 'PASS' for x in entries),
                'automatedFailures': sum(x['automatedStatus'] == 'FAIL' for x in entries),
                'missingOrInvalid': sum(x['automatedStatus'] in ('MISSING', 'INVALID') for x in entries),
+               'evidenceType': 'SIMULATED_AUTOMATED_BROWSER_ONLY',
                'independentSecurityPrivacy': 'PENDING', 'manualAccessibility': 'NOT TESTED',
                'actualBrowserZoom': 'NOT TESTED', 'independentVisualQa': 'PENDING',
                'finalDesignFreeze': 'BLOCKED'}
