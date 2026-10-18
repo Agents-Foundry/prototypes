@@ -15,7 +15,8 @@ test('all 32 screens support interactive sample validation and seven scenarios',
       await page.locator('#flow-input').fill('');
       await page.locator('[data-action="flow-validate"]').click();
       await expect(page.getByText('Validation failed')).toBeVisible();
-      await page.locator('#flow-input').fill('demo-value');
+      const validSample = slug === 'admin' && step === 2 ? 'reviewer@example.invalid' : slug === 'platform' && step === 4 ? '100000' : 'demo-value';
+      await page.locator('#flow-input').fill(validSample);
       await page.locator('[data-action="flow-validate"]').click();
       await expect(page.getByText('Sample validated')).toBeVisible();
       await page.locator('[data-action="flow-clear"]').click();
