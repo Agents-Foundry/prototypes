@@ -1,0 +1,25 @@
+name: Prototype Gallery Coverage
+on:
+  pull_request:
+    paths:
+      - 'prototype-gallery/**'
+      - 'scripts/check_gallery_coverage.py'
+      - '.github/workflows/gallery-coverage.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'prototype-gallery/**'
+      - 'scripts/check_gallery_coverage.py'
+      - '.github/workflows/gallery-coverage.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python scripts/check_gallery_coverage.py
