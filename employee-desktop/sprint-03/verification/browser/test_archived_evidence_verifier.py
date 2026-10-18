@@ -15,15 +15,18 @@ def check():
         for key in sorted(EXPECTED):
             report = evidence / f'{key}.json'
             screenshot = evidence / f'{key}.png'
-            report.write_text(json.dumps({'id': key, 'simulated': True}))
+            report.write_text(json.dumps({'id': key, 'simulated': True, 'gitSha': 'a'*40, 'axeViolations': [], 'dimensions': {'viewportWidth': int(key.split('-')[1]), 'documentWidth': int(key.split('-')[1])}}))
             screenshot.write_bytes(b'synthetic screenshot ' + key.encode())
             entries.append({'id': key, 'automatedStatus': 'PASS',
+                            'sourceSha': 'a'*40, 'reportExists': True, 'screenshotExists': True, 'violations': 0,
                             'reportSha256': hashlib.sha256(report.read_bytes()).hexdigest(),
                             'screenshotSha256': hashlib.sha256(screenshot.read_bytes()).hexdigest()})
         index_path = root / 'index.json'
         def save(entries):
             index_path.write_text(json.dumps({'summary': {'evidenceType': 'SIMULATED_AUTOMATED_BROWSER_ONLY',
-                                                         'expected': 48, 'automatedPass': 48},
+                                                         'expectedSourceSha': 'a'*40, 'observedSourceShas': ['a'*40],
+                                                         'expected': 48, 'captured': 48, 'automatedPass': 48,
+                                                         'automatedFailures': 0, 'missingOrInvalid': 0},
                                               'entries': entries}))
         save(entries)
         assert verify(index_path, evidence) == []
