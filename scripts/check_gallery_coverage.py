@@ -21,4 +21,7 @@ for slug, screens in steps.items():
         assert re.search(r"['\"]" + re.escape(screen) + r"['\"]", source), screen
 assert source.count("intro:") == 32, "Expected 32 distinct detailed entries"
 assert "No external write, secret access, policy evaluation, approval or publication occurs." in source
-print("PASS: 32 screen-specific concept entries across 4 surfaces (static checks only)")
+for scenario in ("normal", "loading", "offline", "denied", "empty", "error", "unknown"):
+    assert f'value="{scenario}"' in source, f"Missing scenario: {scenario}"
+assert "Outcome unknown. Do not replay privileged actions" in source
+print("PASS: 32 screen-specific concept entries and 7 scenario controls (static checks only)")
