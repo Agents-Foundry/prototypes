@@ -46,7 +46,7 @@ def main():
                             viewport = dimensions.get('viewportWidth') if isinstance(dimensions, dict) else None
                             document = dimensions.get('documentWidth') if isinstance(dimensions, dict) else None
                             valid_dimensions = all(type(value) in (int, float) and math.isfinite(value) and value > 0 for value in (viewport, document)) and viewport == width
-                            if not isinstance(violations, list) or not valid_dimensions:
+                            if not isinstance(violations, list) or not valid_dimensions or viewport != width:
                                 entry['automatedStatus'] = 'INVALID'
                             else:
                                 entry['violations'] = len(violations)
