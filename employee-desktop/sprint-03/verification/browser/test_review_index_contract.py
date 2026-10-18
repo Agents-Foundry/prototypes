@@ -9,7 +9,7 @@ from pathlib import Path
 
 SCRIPT = Path(__file__).with_name('build_review_index.py')
 
-def run_case(mismatch):
+def run_case(mismatch=False, missing_screenshot=False, axe_violation=False):
     with tempfile.TemporaryDirectory() as tmp:
         root = Path(tmp)
         evidence = root / 'evidence'
@@ -20,20 +20,25 @@ def run_case(mismatch):
                 for state in ('initial', 'permission', 'denied', 'expired', 'revoked', 'offline', 'reconnected', 'unknown'):
                     key = f'{theme}-{width}-{state}'
                     sha = 'wrong-sha' if mismatch and key == 'light-480-initial' else 'candidate-sha'
+                    violations = [{'id': 'fixture-violation'}] if axe_violation and key == 'light-480-initial' else []
                     (evidence / (key + '.json')).write_text(json.dumps({
                         'id': key, 'simulated': True, 'gitSha': sha,
-                        'axeViolations': [], 'dimensions': {'viewportWidth': width, 'documentWidth': width}
+                        'axeViolations': violations, 'dimensions': {'viewportWidth': width, 'documentWidth': width}
                     }))
-                    (evidence / (key + '.png')).write_bytes(b'fixture')
+                    if not (missing_screenshot and key == 'light-480-initial'):
+                        (evidence / (key + '.png')).write_bytes(b'fixture')
         env = dict(os.environ, GITHUB_SHA='candidate-sha')
         result = subprocess.run([sys.executable, str(SCRIPT), '--evidence', str(evidence),
                                  '--output', str(output)], env=env, capture_output=True, text=True)
         index = json.loads((output / 'index.json').read_text())
         assert index['summary']['expectedSourceSha'] == 'candidate-sha'
         assert index['summary']['evidenceType'] == 'SIMULATED_AUTOMATED_BROWSER_ONLY'
-        if mismatch:
+        if mismatch or missing_screenshot or axe_violation:
             assert result.returncode != 0, result.stdout
-            assert index['summary']['missingOrInvalid'] >= 1
+            if axe_violation:
+                assert index['summary']['automatedFailures'] >= 1
+            else:
+                assert index['summary']['missingOrInvalid'] >= 1
         else:
             assert result.returncode == 0, result.stderr + result.stdout
             assert index['summary']['automatedPass'] == 48
@@ -41,4 +46,6 @@ def run_case(mismatch):
 if __name__ == '__main__':
     run_case(False)
     run_case(True)
+    run_case(missing_screenshot=True)
+    run_case(axe_violation=True)
     print('Evidence-index SHA contract checks passed')
