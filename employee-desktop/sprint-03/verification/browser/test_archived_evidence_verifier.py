@@ -44,6 +44,26 @@ def check():
         save(entries)
         assert any('malformed' in e for e in verify(index_path, evidence))
 
+
+        entries[0]['reportSha256'] = hashlib.sha256((evidence / f"{entries[0]['id']}.json").read_bytes()).hexdigest()
+        entries[0]['sourceSha'] = 'b'*40
+        save(entries)
+        assert any('index source SHA mismatch' in e for e in verify(index_path, evidence))
+        entries[0]['sourceSha'] = 'a'*40
+        save(entries)
+        data = json.loads(index_path.read_text())
+        data['summary']['expectedSourceSha'] = 'invalid'
+        index_path.write_text(json.dumps(data))
+        assert any('malformed expected source SHA' in e for e in verify(index_path, evidence))
+        save(entries)
+        report = evidence / f"{entries[0]['id']}.json"
+        payload = json.loads(report.read_text())
+        payload['gitSha'] = 'b'*40
+        report.write_text(json.dumps(payload))
+        entries[0]['reportSha256'] = hashlib.sha256(report.read_bytes()).hexdigest()
+        save(entries)
+        assert any('report source SHA mismatch' in e for e in verify(index_path, evidence))
+
 if __name__ == '__main__':
     check()
     print('Archived evidence verifier contract checks passed')
