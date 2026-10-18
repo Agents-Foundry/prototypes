@@ -49,6 +49,16 @@ def run_case(case='valid'):
                             data['dimensions']['viewportWidth'] = width + 1
                         elif case == 'nonfinite-dimension':
                             data['dimensions']['documentWidth'] = float('inf')
+                        elif case == 'wrong-viewport':
+                            data['dimensions']['viewportWidth'] = width + 1
+                        elif case == 'missing-sha':
+                            data['gitSha'] = ''
+                        elif case == 'numeric-sha':
+                            data['gitSha'] = 123
+                        elif case == 'wrong-id':
+                            data['id'] = 'unexpected-id'
+                        elif case == 'non-object-report':
+                            data = []
                     if key == TARGET and case == 'null-report':
                         data = None
                     elif key == TARGET and case == 'array-report':
@@ -86,7 +96,8 @@ if __name__ == '__main__':
     for case in (
         'valid', 'sha-mismatch', 'missing-screenshot', 'axe-violation', 'overflow',
         'missing-dimensions', 'string-dimension', 'zero-dimension',
-        'boolean-dimension', 'nonfinite-dimension', 'empty-sha', 'numeric-sha',
+        'boolean-dimension', 'nonfinite-dimension', 'wrong-viewport',
+        'missing-sha', 'numeric-sha', 'wrong-id', 'non-object-report', 'empty-sha', 'numeric-sha',
         'viewport-mismatch', 'null-report', 'array-report', 'broken-json',
     ):
         run_case(case)
