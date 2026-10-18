@@ -1,0 +1,44 @@
+name: Repository Migration Inventory
+on:
+  push:
+    branches:
+      - chore/phase2-inventory-execution
+    paths:
+      - 'scripts/inventory_prototypes.py'
+      - '.github/workflows/repository-migration-inventory.yml'
+      - 'docs/phase2-inventory.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate tracked-file inventory
+        run: python scripts/inventory_prototypes.py --output repository-inventory.json
+      - name: Summarize migration candidates
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          data=json.load(open("repository-inventory.json",encoding="utf-8"))
+          candidates=[x for x in data["files"] if x["sprint_path"]]
+          categories=Counter(x["category"] for x in candidates)
+          with open(__import__("os").environ["GITHUB_STEP_SUMMARY"],"a",encoding="utf-8") as out:
+              out.write(f"## Inventory at {data['source_commit']}\n\n")
+              out.write(f"Tracked files: {data['tracked_files']}  \nSprint paths: {data['sprint_paths']}\n\n")
+              for key,value in sorted(categories.items()):
+                  out.write(f"- {key}: {value}\n")
+              out.write("\nSee artifact for complete candidate paths and references. No files were moved.\n")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repository-migration-inventory
+          path: repository-inventory.json
+          retention-days: 30
