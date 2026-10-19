@@ -86,6 +86,10 @@ Facts the screens must respect (all from files I read):
 | D6 | Platform Owner | Both staff-run managed service and self-host operator; billing marked future | Fleet and runtime operations first; commercial screens labelled roadmap |
 | D7 | Offline / BYOK | Roadmap-labelled; server-side recovery is the real flow | Sprint 03 offline cache and device BYOK become planned screens |
 | D8 | Breadth | Design breadth fully (providers, connectors, SSO, SCIM) | Interactive designs for unbuilt items |
+| D9 | Where the approver class lives | **Platform policy by action and risk, with a tighten-only organization override** | Platform default: LOW/MEDIUM = employee, HIGH = admin (CRITICAL stays denied); an organization may only move an action up to admin; needs a new `APPROVER_CLASS` condition in the policy engine and an approver check that replaces the role-only check |
+| D10 | Agent Studio audience | **Agents Foundry staff only for now** | Studio is a vendor-side tool; customers install and configure. Customer authoring is drawn once, as a labelled later phase |
+| D11 | Google-mode deployments | **Design a Google-mode admin experience** | New platform work: admin routes and role mapping for Google identities (today the identity directory is file-managed and `/api/organization/*` is password-mode only). Drawn as Proposed, with ORG-040 added |
+| D12 | Visual language | **Match the shipped screens exactly** | The prototype design system must be re-tokened to the shipped look (Inter, `#6f5cf1`, shipped card and button styles, the employee app's dark sidebar and violet-to-blue gradient) and shipped components reproduced; only the flows change. This needs one more reading pass over the shipped component styles before any screen is redrawn |
 
 ### Tensions I need you to confirm
 
@@ -93,6 +97,8 @@ Facts the screens must respect (all from files I read):
 2. **D2/D3 tighten-only.** The platform rule says organization overrides may only tighten. I propose that an organization can move any action from "employee may approve" up to "admin approves", never the reverse. You did not choose a kill-switch (D4), but this is the existing tighten-only principle, not a new guard. Confirm.
 3. **D2 two-person property.** Today an admin who is not the requester decides. With D2 the person who asked the agent to act also approves, so MEDIUM actions lose independent review. The payload binding, expiry and audit trail remain. I will draw the screens as decided and flag this in the ADR text; I am not able to judge your risk appetite.
 4. **D2 changes two coded checks, not one.** Verified: the decision route requires role `ADMIN` (`app.ts:405-409`) **and** `decideApproval` rejects `requestedBy === actorId` where `requestedBy` is the run's employee (`database.ts:1979`, `action-gateway.ts:186`). Employee approval for LOW/MEDIUM therefore needs both changed, a new approver-class field in the policy, and updated tests. The agent runtime doc (`agent-runtime.md`) states the opposite invariant and would need rewriting. I will mark every employee-approval screen "Proposed rule" until that ADR exists.
+6. **D12 vs navigation.** The shipped admin console is one scrolling page of panels with an anchor list and no router; the employee app is a single conversation view. "Match the shipped screens exactly" and "redesign only the flows" are compatible if the redesign keeps shipped components but adds per-screen navigation. I will treat the per-screen navigation as a flow change and keep component styling identical; tell me if you want the single-page layout kept as well.
+7. **Studio under D10.** Staff-only authoring still needs a review and promotion workflow that does not exist in the platform (Milestone 6); the STD screens stay Planned, and customer authoring (STD-003 for customers) is a single labelled later-phase screen rather than a full flow.
 5. **Does D2 also cover agent provisioning requests?** An employee requesting an agent is a separate flow with its own `SELF_APPROVAL_FORBIDDEN` check (`database.ts:1466`). I will leave provisioning approval with the admin unless you say otherwise.
 
 ## 4. Review findings: where the 99 screens contradict the platform
@@ -182,7 +188,7 @@ Rules: legacy IDs stay (CLAUDE.md rule 4), so a screen that is wrong is **repurp
 | **EMP-031** | New (Planned) | Encrypted offline read-only cache (carried from Sprint 03 decisions) | D7 |
 | **EMP-032** | New | Cancel run: what stops, what is unknown, reconcile hand-off | `run.cancel` |
 
-### 6.2 Organization Admin (ORG) — 27 existing, 12 proposed new
+### 6.2 Organization Admin (ORG) — 27 existing, 13 proposed new
 
 | ID | Action | Change | Source |
 | --- | --- | --- | --- |
@@ -221,6 +227,7 @@ Rules: legacy IDs stay (CLAUDE.md rule 4), so a screen that is wrong is **repurp
 | **ORG-033** | New | Lifecycle and provisioning audit trail | `app.html` |
 | **ORG-034** | New | Employee agent requests: review answers, approve or reject with reason | provisioning routes |
 | **ORG-035** | New | Source-control connections (GitHub, Bitbucket): git host, API base URL, credential mode `static_token` or `github_app` (app id, installation id), secret reference, allowed repositories, status, optimistic version, disable | ADR 0031, `schema.md` |
+| **ORG-040** | New (Proposed, decision D11) | Google-mode administration: sign-in with the one configured Workspace domain, directory of Google identities, mapping each to ADMIN or EMPLOYEE (today a file-managed identity directory), invite and suspend flows, and the same panels as password mode; clearly marked as requiring new platform work | `identity-directory.ts`, `auth.ts`, D11 |
 | **ORG-039** | New | Credential leases: list and revoke the 5-minute single-use repository leases; status `ISSUED/REDEEMED/RELEASED/REVOKED/EXPIRED`, outcome `SUCCEEDED/FAILED/TIMED_OUT/CANCELLED/INTERRUPTED`, repository, git ref, run, issued-to runtime, revoke reason; refusals `CREDENTIAL_LEASE_NOT_LIVE`, `CREDENTIAL_GRANT_EXPIRED` | `credential-routes.ts`, `schema.md`, ADR 0031 |
 | **ORG-036** | New | Installation edit and retire (API-only today) | `agent-catalog.md` |
 | **ORG-037** | New | Account linking: private invitation preview and confirmation | auth routes |
@@ -276,7 +283,7 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 
 | ID | Action | Change | Source |
 | --- | --- | --- | --- |
-| STD-001 | Modify | Sign-in for authors; audience (vendor staff or customers) is an open question | §10 Q4 |
+| STD-001 | Modify | Sign-in for Agents Foundry staff authors and reviewers (decision D10); the customer-author entry is a single Planned screen | D10 |
 | STD-002 | Modify (Implemented read) | Catalog of five roles and seven versions with digest | `catalog.ts` |
 | STD-003 | Relabel | Create blueprint Planned (roles are code today) | `agent-catalog.md` |
 | STD-004 | Modify | Version overview: digest, bundle schema, pinned skills/tools/workflows | ADR 0010 |
@@ -295,7 +302,7 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 | STD-017 | Rewrite | Rollback and deprecation: new installations pin an earlier version; existing agents never change | ADR 0010 |
 | STD-018 | Modify | Quality trend per model, role and task (import-based) | ADR 0026 |
 | STD-019 | Relabel | Custom skills Planned: skills are guidance, not executable | status table |
-| STD-020 | Modify | Studio access: audience and roles open question | §10 Q4 |
+| STD-020 | Modify | Studio access for Agents Foundry staff (authors, reviewers, publishers); customer roles are Planned | D10 |
 | **STD-021** | New | Catalog validation: the whole catalog fails on any broken reference (list of rules) | `agent-catalog.md` |
 | **STD-022** | New | Questionnaire builder with INSTALLATION vs AGENT scope and connector mapping | same |
 | **STD-023** | New | Workflow builder: steps of skill and action | same |
@@ -305,7 +312,7 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 | **STD-027** | New | Bundle compatibility: `BLUEPRINT_VERSION_UNSUPPORTED` handling | ADR 0030 |
 | **STD-028** | New | Role expansion backlog: 55-role catalog marked current vs expansion | website `catalog.json` |
 
-**Totals if approved:** 99 existing screens modified, rewritten or relabelled; **39 new** (EMP 8, ORG 12, PLT 11, STD 8) → 138 screens. Counts of "Planned" screens are shown by badge, not hidden.
+**Totals if approved:** 99 existing screens modified, rewritten or relabelled; **40 new** (EMP 8, ORG 13, PLT 11, STD 8) → 139 screens. Counts of "Planned" screens are shown by badge, not hidden.
 
 ## 7. Traceability (examples, to be completed per screen)
 
@@ -329,7 +336,7 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 ## 8. Sequencing (each a reviewable PR)
 
 0. **Decisions:** you confirm §3 tensions; an ADR for employee approval (D2/D3) is drafted for the platform repo. No screen work depends on it being accepted, but the badge stays "Proposed rule" until then.
-1. **Shared:** status badge, source references, reason-code explainer, correlation breadcrumb, real scenarios, approver-class chip.
+1. **Shared:** re-token the design system to the shipped look (D12) after one more reading pass over the shipped component styles; then status badge, source references, reason-code explainer, correlation breadcrumb, real scenarios, approver-class chip (platform policy default with tighten-only override, D9).
 2. **EMP core:** EMP-004, 005, 012, 016, 020, 022 plus EMP-025, 027, 032 (the approval, run and recovery model).
 3. **ORG core:** ORG-019, 020, 028, 029, 024, 017, 018, 022, 035, 039 plus the install-and-create flow ORG-008–013 and ORG-034, 036.
 4. **ORG structure and identity:** ORG-001–007, 014–016, 003 domains, 037.
@@ -351,18 +358,18 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 **Questions still open (I will not assume):**
 
 1. Confirm the five tensions in §3 (including whether D2 also covers agent provisioning requests).
-2. D2 changes a security invariant enforced in two places (route role check and the self-approval check). Who owns the decision and the ADR in the platform repository, and should the approver class be a new policy field or derived from risk only?
+2. D2 changes a security invariant enforced in two places (route role check and the self-approval check). **Resolved in part by D9:** the approver class is platform policy by action and risk with a tighten-only organization override. **Still open:** who owns the ADR in the platform repository, and the exact precedence for an organization override on an action the manifest already restricts.
 3. *(Resolved by reading the code: `requested_by` is the run's employee, so the current check blocks the employee. No question remains here.)*
-4. **Studio audience:** are blueprints authored only by Agents Foundry staff (the catalog is global and shipped in code today), or can customers author organization-specific blueprints (the website mentions external role packages as planned)?
+4. *(Resolved by D10: Agents Foundry staff only for now; customer authoring is a later, labelled phase.)*
 5. **Platform authentication:** should the operator console use a separate identity system from tenant sign-in (the docs say separately authenticated)?
 6. **Data region:** the platform code I read has no per-tenant region. Do you want it designed as a future setting, or removed?
 7. **Earlier Sprint 03 decisions** (EMP-DEC-01–10, PLT-DEC, DEC-01–08): I have not re-traced them against the platform. D7 retires two of them as roadmap; should the rest be revalidated screen by screen?
 8. **Commerce:** the website lists indicative plans only. Should billing screens model those editions, or stay generic?
 9. **Which "55-role" roles** matter for screens beyond the five engineering roles (the website separates current from expansion roles)?
 10. **Legal hold:** `LEGAL_HOLD` exists as a retention class. I did not find how a hold is placed or lifted. Who places it, and should the screens design that?
-11. **Admin panels in Google mode:** auth mode is deployment-wide (`demo`, `password`, `google`) and admin routes are password-mode only. Should the prototypes design a Google-mode admin experience (new platform work), or keep showing "unavailable in this deployment"?
-12. **Design language:** the shipped apps have their own look (hexagon mark, "Human ambition. Agent execution.", Inter, violet `#6f5cf1`, a violet-to-blue gradient in the employee app). It is close to Direction C. Should the prototypes adopt the shipped tokens exactly, or keep Direction C and align only the primary colour and brand mark?
-13. **Approver class:** the policy engine has no approver concept (`ActionPolicyContext` has the agent's `employeeId` only). For D3 should the approver class live in the signed manifest (per agent), in the platform policy (per action and risk), in an organization override, or all three with tighten-only precedence?
+11. *(Resolved by D11: design a Google-mode admin experience, marked Proposed. **Follow-up:** which operations must a Google-mode administrator be able to do on day one, given the identity directory is file-managed today, and who maps Google identities to ADMIN or EMPLOYEE?)*
+12. *(Resolved by D12: match the shipped screens exactly. **Follow-up:** I need one more reading pass over the shipped component styles before redrawing, and the single-scrolling-page admin layout versus per-screen navigation question in section 3, item 6.)*
+13. *(Resolved by D9: platform policy by action and risk with a tighten-only organization override.)*
 14. **Active run per thread:** a thread allows exactly one active run. With employee approval, should an employee be able to start a new task in a thread whose run is waiting for their own approval, or must they decide first?
 
 **Read for this revision (and used for claims):** the platform README, `architecture-v2.md`, `architecture-v2-gap-analysis.md`, `security.md`, `roadmap.md`, `agent-catalog.md`, `agent-manifest-v2.md`, `agent-runtime.md`, `execution-runtime.md`, `action-gateway.md`, `failure-handling.md`, `diy-organization-platform.md`; ADRs 0005, 0011 (head), 0013, 0021–0024, 0026, 0031 (head), 0032, 0033, 0034, 0036 (head), 0037 (head), 0038 (head), 0039; contracts `actions.ts`, `execution.ts`, `run-lifecycle.ts`; the approval route and `decideApproval`, the Action Gateway approval insert, the admin and employee `app.html`, `action-reconciliations.ts`, `web-auth` `session.ts` and `auth-panel.html`, the five blueprint questionnaires; from the docs repo the implementation status, policies and approvals, employee workspace, architecture gaps, model spending, customer onboarding, setup, authorization and QA use case pages, and the execution, governance and models API references; the website README, catalog and policy contract; `pilot-readiness/assessment.json`, `operations/operations.json`, the runbook and observability headings, the Terraform resource list and the head of each host script; the smoke target README and package.
