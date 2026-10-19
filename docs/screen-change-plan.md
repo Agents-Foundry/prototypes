@@ -373,6 +373,22 @@ Every earlier decision record is itself **Pending / not approved** (sprint evide
 
 **Result (28 records):** 6 Confirmed (DEC-05 for its binding rules only), 15 Partial, 3 Superseded in whole or part, 4 Not verified. The one wording conflict is EMP-DEC-10's "idempotent retry". Counts are mine and unreviewed.
 
+## 7b. Shipped visual language (D12 read, done)
+
+Read from `apps/control-plane-web/src/app/app.scss` and `apps/employee-desktop/src/app/app.scss` (both at the pinned SHA). The shipped apps define no CSS variables; colors are literals in component styles.
+
+| Aspect | Shipped | Prototype today (`af.css`) | Change in Phase 1 |
+| --- | --- | --- | --- |
+| Font | Inter, system sans fallback | Inter, Segoe UI fallback | None |
+| Shell | Dark navy side rail (`#17213f` admin, `#18203a` employee) on a light canvas (`#f5f7fb` / `#f7f8fc`) | Light shell, token-based | Re-token to a navy rail and light canvas |
+| Accent | Violet `#6f5cf1` / `#7c5cff`, gradient to blue `#4ba8ff` / `#4aa8f5` | Indigo `#5148E5`, accent `#7C5CFA` | Move primary to the shipped violet; keep the gradient on progress and avatars |
+| Status colors | Green `#259c6b`, amber `#bc7214`/`#ee9a29`, blue `#218fba`, red `#a13945` on pale tints | Darker contrast-tuned tokens | Use shipped hues but keep the axe-passing contrast values, so the look matches while the 99-screen axe run stays green; any hue that fails is darkened and noted |
+| Shape | Rounded cards, radii 10–14px, pills 20px | Smaller radii (`--r1`) | Raise card radius to 12–14px |
+| Breakpoints | 1000px and 600px | Own breakpoints | Align to 1000 and 600 |
+| Dark mode | Not found in the shipped styles | Light and dark | Keep dark mode (it is a CLAUDE.md design requirement), labelled Proposed |
+
+Consequence: the shipped admin console is a single scrolling page and the employee app has no router, so D24 (per-screen navigation) is a deliberate addition, badged Proposed.
+
 ## 7. Traceability (examples, to be completed per screen)
 
 | Screen | Primary API / contract |
@@ -414,7 +430,7 @@ Every earlier decision record is itself **Pending / not approved** (sprint evide
 
 ## 10. Open questions and what I did not read
 
-**Questions: all answered (see D1–D27).** The list below is kept as the record of what was asked; items marked resolved map to a decision above. The D13 revalidation is done as section 7a (verdicts are proposals for the product owner to confirm). One follow-up remains that is work, not a question: a reading pass over the shipped component styles for D12, to be done at the start of Phase 1.
+**Questions: all answered (see D1–D27).** The list below is kept as the record of what was asked; items marked resolved map to a decision above. The D13 revalidation is done as section 7a (verdicts are proposals for the product owner to confirm). The D12 style read is done as section 7b. No questions or reading follow-ups remain; what is left is the product owner's review of the plan and of the 7a verdicts.
 
 **Original question list (for the record):**
 
