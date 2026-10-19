@@ -1,0 +1,7 @@
+﻿{
+  "name": "agents-foundry-prototype-apps-tests",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": { "test": "playwright test" },
+  "devDependencies": { "@playwright/test": "1.49.1", "@axe-core/playwright": "4.10.1" }
+}

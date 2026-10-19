@@ -8,10 +8,12 @@
 
 | Application | Team guide | Clickable concept |
 | --- | --- | --- |
-| Platform Owner | [Open guide](platform-owner/README.md) | [Launch gallery](prototype-gallery/index.html) |
-| Organization Admin | [Open guide](organization-admin/README.md) | [Launch gallery](prototype-gallery/index.html) |
-| Employee Desktop | [Open guide](employee-desktop/README.md) | [Launch gallery](prototype-gallery/index.html) |
-| Agent Studio | [Open guide](agent-studio/README.md) | [Launch gallery](prototype-gallery/index.html) |
+| Platform Owner | [Open guide](platform-owner/README.md) | [Full prototype (28 screens)](platform-owner/app/index.html) |
+| Organization Admin | [Open guide](organization-admin/README.md) | [Full prototype (27 screens)](organization-admin/app/index.html) |
+| Employee Desktop | [Open guide](employee-desktop/README.md) | [Full prototype (24 screens)](employee-desktop/app/index.html) |
+| Agent Studio | [Open guide](agent-studio/README.md) | [Full prototype (20 screens)](agent-studio/app/index.html) |
+
+The [concept gallery](prototype-gallery/index.html) remains a lightweight overview. The four full prototypes share one [design system](design-system/README.md), run with no build step (`python -m http.server`), and list every screen in the [screen registry](screen-registry/SCREENS.md). **All 99 screens are proposals**; see the [redesign overview](docs/redesign-overview.md) for scope, how to review and what is still open.
 
 [Documentation index](docs/README.md) · [Canonical folder organization and safe migration plan](docs/repository-organization.md)
 
