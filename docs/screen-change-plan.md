@@ -336,6 +336,43 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 
 **Totals if approved:** 99 existing screens modified, rewritten or relabelled; **40 new** (EMP 8, ORG 13, PLT 11, STD 8) → 139 screens. Counts of "Planned" screens are shown by badge, not hidden.
 
+## 7a. Revalidation of earlier decisions (D13)
+
+Every earlier decision record is itself **Pending / not approved** (sprint evidence is unchanged and not edited). Verdicts below are **my proposed reading against the platform facts in section 2 and decisions D1–D27**; the product owner confirms or overrides each. Only "Confirmed" and "Partial" rows guide screens; "Superseded" and "Conflicts" rows do not. "Not verified" means I did not find platform evidence either way, so it is not assumed.
+
+| Record | Topic | Verdict | Reason |
+| --- | --- | --- | --- |
+| EMP-DEC-01 | Isolated native desktop shell | Confirmed | Shipped employee app is Angular + Tauri; least-privilege claims stay labelled to what is built |
+| EMP-DEC-02 | Central history, encrypted offline cache, scoped memory | Partial | Central history holds; offline cache and BYOK are roadmap-labelled (D7) |
+| EMP-DEC-03 | Keychain, vault, credential broker | Partial | Credential leases exist; keychain and enterprise vault are not shown as shipped |
+| EMP-DEC-04 | Production read-only default, step-up, fail-closed approval | Partial | Fail-closed and risk policy hold (D9); step-up is not verified in the platform |
+| EMP-DEC-05 | Human approval for side effects, revocable execution | Superseded in part | Approver now follows approver class (D2, D3, D23); ADR draft pending |
+| EMP-DEC-06 | Tenant-scoped Git, isolated workspaces | Partial | Container sandbox and workspace isolation hold; scoped Git access is not verified |
+| EMP-DEC-07 | Policy-governed browser sessions, redacted evidence | Confirmed | Execution runtime produces Playwright evidence under grants and egress proxy |
+| EMP-DEC-08 | Org-approved connectors, governed writes | Confirmed | Catalog, installations and Action Gateway match |
+| EMP-DEC-09 | Versioned artifacts, retention, governed sharing | Partial | Retention classes and 60 s retrieval hold; legal hold read-only (D18); "versioned" and "sharing" not verified |
+| EMP-DEC-10 | Checkpoints, idempotent reconciliation, resume | Partial | Checkpoints and 10 min lease recovery hold; reconciliation is Applied / Not applied with no retry, so "idempotent retry" must not be drawn |
+| PLT-DEC-01 | Strict tenant isolation, scoped support access | Confirmed | PostgreSQL RLS; support access never inferred from admin status |
+| PLT-DEC-02 | Role-controlled provisioning, four-eyes for high risk | Partial | Provisioning is admin-approved (D22); operator four-eyes is not verified |
+| PLT-DEC-03 | Tenant-selected region, migration | Superseded | Region field removed; deployment region read-only (D15) |
+| PLT-DEC-04 | Versioned plan catalog, entitlements, billing lifecycle | Partial | Editions shown as Planned entitlements, billing future (D16) |
+| PLT-DEC-05 | Tenant-authorized support, break-glass | Not verified | No platform evidence of break-glass found; stays a Proposed screen, not claimed |
+| PLT-DEC-06 | Suspension, retention-aware termination, approved deletion | Partial | Retention classes exist; deletion approval flow is not verified |
+| PLT-DEC-07 | Signed immutable releases, phased distribution, rollback | Partial | Digest-pinned catalog and signed Manifest v2 hold; phased distribution and rollback not verified |
+| PLT-DEC-08 | Platform baselines, stronger tenant policy | Confirmed | Matches platform policy with tighten-only overrides (D9, D23) |
+| PLT-DEC-09 | Workforce SSO, mandatory MFA, step-up | Superseded in part | Operator sign-in is a separate identity with a hardware key (D14) |
+| PLT-DEC-10 | Minimized telemetry, redaction, residency | Partial | Telemetry and redaction hold; residency part removed with D15 |
+| DEC-01 | Department and team before activation | Not verified | No platform evidence either way; keep as a prototype rule, labelled Proposed |
+| DEC-02 | One owning team, scoped grants | Not verified | As above |
+| DEC-03 | Org keys plus employee BYOK by policy | Partial | BYOK is roadmap-labelled (D7); admin-cannot-see-keys holds |
+| DEC-04 | Provider allowlist, per-agent model choice | Partial | Runtime is Anthropic only; allowlist shown with one provider, others Planned |
+| DEC-05 | Risk-tiered approvals bound to exact action, expiring | Confirmed, approver superseded | Binding, expiry, fail-closed hold; who approves follows D2, D3, D23 |
+| DEC-06 | MFA for admins, SSO for enterprise | Partial | Google mode exists (D11, D19); SAML and SCIM are not standard promises |
+| DEC-07 | Cost to owning team, org caps | Partial | Model spending (tokens, cost, price book, alerts) exists; team attribution not verified |
+| DEC-08 | Activation lifecycle states | Not verified | Provisioning is admin-approved (D22); the exact state names are not confirmed |
+
+**Result (28 records):** 6 Confirmed (DEC-05 for its binding rules only), 15 Partial, 3 Superseded in whole or part, 4 Not verified. The one wording conflict is EMP-DEC-10's "idempotent retry". Counts are mine and unreviewed.
+
 ## 7. Traceability (examples, to be completed per screen)
 
 | Screen | Primary API / contract |
@@ -377,7 +414,7 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 
 ## 10. Open questions and what I did not read
 
-**Questions: all answered (see D1–D27).** The list below is kept as the record of what was asked; items marked resolved map to a decision above. Two follow-ups remain that are work, not questions: the traceability table for D13, and one more reading pass over the shipped component styles for D12.
+**Questions: all answered (see D1–D27).** The list below is kept as the record of what was asked; items marked resolved map to a decision above. The D13 revalidation is done as section 7a (verdicts are proposals for the product owner to confirm). One follow-up remains that is work, not a question: a reading pass over the shipped component styles for D12, to be done at the start of Phase 1.
 
 **Original question list (for the record):**
 
