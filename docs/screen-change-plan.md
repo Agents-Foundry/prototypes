@@ -356,22 +356,22 @@ Every earlier decision record is itself **Pending / not approved** (sprint evide
 | PLT-DEC-02 | Role-controlled provisioning, four-eyes for high risk | Partial | Provisioning is admin-approved (D22); operator four-eyes is not verified |
 | PLT-DEC-03 | Tenant-selected region, migration | Superseded | Region field removed; deployment region read-only (D15) |
 | PLT-DEC-04 | Versioned plan catalog, entitlements, billing lifecycle | Partial | Editions shown as Planned entitlements, billing future (D16) |
-| PLT-DEC-05 | Tenant-authorized support, break-glass | Not verified | No platform evidence of break-glass found; stays a Proposed screen, not claimed |
+| PLT-DEC-05 | Tenant-authorized support, break-glass | Not in platform | A case-insensitive search of all six cloned repos for "break-glass" and "emergency access" found nothing. Break-glass screens stay Proposed and must say the platform has no such capability |
 | PLT-DEC-06 | Suspension, retention-aware termination, approved deletion | Partial | Retention classes exist; deletion approval flow is not verified |
 | PLT-DEC-07 | Signed immutable releases, phased distribution, rollback | Partial | Digest-pinned catalog and signed Manifest v2 hold; phased distribution and rollback not verified |
 | PLT-DEC-08 | Platform baselines, stronger tenant policy | Confirmed | Matches platform policy with tighten-only overrides (D9, D23) |
 | PLT-DEC-09 | Workforce SSO, mandatory MFA, step-up | Superseded in part | Operator sign-in is a separate identity with a hardware key (D14) |
 | PLT-DEC-10 | Minimized telemetry, redaction, residency | Partial | Telemetry and redaction hold; residency part removed with D15 |
-| DEC-01 | Department and team before activation | Not verified | No platform evidence either way; keep as a prototype rule, labelled Proposed |
-| DEC-02 | One owning team, scoped grants | Not verified | As above |
+| DEC-01 | Department and team before activation | Not in platform (narrow search) | No `owning_team`, `team_id` or `department_id` columns in the control-plane `.ts` or `.sql` files; the shipped organization structure panel is the closest feature. Keep as a prototype rule, labelled Proposed |
+| DEC-02 | One owning team, scoped grants | Not in platform (narrow search) | As above |
 | DEC-03 | Org keys plus employee BYOK by policy | Partial | BYOK is roadmap-labelled (D7); admin-cannot-see-keys holds |
 | DEC-04 | Provider allowlist, per-agent model choice | Partial | Runtime is Anthropic only; allowlist shown with one provider, others Planned |
 | DEC-05 | Risk-tiered approvals bound to exact action, expiring | Confirmed, approver superseded | Binding, expiry, fail-closed hold; who approves follows D2, D3, D23 |
 | DEC-06 | MFA for admins, SSO for enterprise | Partial | Google mode exists (D11, D19); SAML and SCIM are not standard promises |
 | DEC-07 | Cost to owning team, org caps | Partial | Model spending (tokens, cost, price book, alerts) exists; team attribution not verified |
-| DEC-08 | Activation lifecycle states | Not verified | Provisioning is admin-approved (D22); the exact state names are not confirmed |
+| DEC-08 | Activation lifecycle states | Partial | Provisioning requests are decided APPROVED or REJECTED by an admin and approved agents become `ACTIVE` (`database.ts`). The Draft, Review and Provisioning states in the decision were not found |
 
-**Result (28 records):** 6 Confirmed (DEC-05 for its binding rules only), 15 Partial, 3 Superseded in whole or part, 4 Not verified. The one wording conflict is EMP-DEC-10's "idempotent retry". Counts are mine and unreviewed.
+**Result (28 records):** 6 Confirmed (DEC-05 for its binding rules only), 16 Partial, 3 Superseded in whole or part, 3 "Not in platform" (found no evidence by keyword search; a search can miss things, so the owner should confirm). The one wording conflict is EMP-DEC-10's "idempotent retry". Counts are mine and unreviewed.
 
 ## 7b. Shipped visual language (D12 read, done)
 
