@@ -10,13 +10,20 @@
 | Product-specific journeys | All 32 screens expose an interactive, labeled sample input and validation/result feedback | `prototype-gallery/interactive-flows.js`; Playwright 32-screen traversal | Implemented; CI passed on 2026-10-18 |
 | State behavior | Normal, loading, offline, denied, empty, error, unknown outcome | Gallery scenario selector; Playwright coverage | Implemented; CI passed on 2026-10-18 |
 | Safe operations | No real tenant, member, secret, Jira, agent, publishing or policy mutation | Client-only JavaScript; read-only confirmation text | Source review pending |
-| Browser QA | Desktop and mobile Chromium tests pass | Gallery Browser and Accessibility QA workflow artifact | Not yet verified |
-| Accessibility | No serious/critical WCAG-tagged axe findings in automated scan; keyboard smoke test passes | axe + keyboard Playwright tests | Not yet verified; manual testing outstanding |
+| Browser QA | Desktop and mobile Chromium tests pass | [GitHub Actions run 39159170715](https://github.com/Agents-Foundry/prototypes/actions/runs/39159170715), `gallery-browser-qa` artifact | Automated CI passed (10/10); artifact not independently inspected |
+| Accessibility | No serious/critical WCAG-tagged axe findings in automated scan; keyboard smoke test passes | axe + keyboard Playwright tests in [run 39159170715](https://github.com/Agents-Foundry/prototypes/actions/runs/39159170715) | Automated checks passed; independent/manual accessibility and zoom/reflow testing outstanding |
 | Visual QA | Desktop/mobile layout and all screen states reviewed against design baseline | Screenshots and visual reviewer notes | Pending |
 | Product owner | Named reviewer approves scope, UX and outstanding exceptions | Recorded approval with date and PR SHA | Pending |
 | Independent security | Tenant isolation, privileged action, secrets, policy and audit design review | Signed review evidence | Pending |
 | Independent accessibility | Manual keyboard, screen reader and focus-order verification | Signed review evidence | Pending |
 | Final design freeze | All blocking findings closed; owner authorizes freeze | Signed release/design decision | Pending |
+
+## Automated evidence provenance (not independent sign-off)
+
+- **Verified source:** `main` commit [`03cc8339033b1b80946451f5699d748e9292cb2c`](https://github.com/Agents-Foundry/prototypes/commit/03cc8339033b1b80946451f5699d748e9292cb2c), workflow run [39159170715](https://github.com/Agents-Foundry/prototypes/actions/runs/39159170715), executed 2026-10-18 UTC. The browser job log reports **10/10 Playwright tests passed** across desktop and mobile Chromium, including screen traversal, example validation, scenario transitions, automated axe serious/critical checks, and keyboard-focus smoke tests.
+- **Other green CI runs on that commit:** [Gallery Coverage](https://github.com/Agents-Foundry/prototypes/actions/runs/39159170884), [Mockup Coverage Reconciliation](https://github.com/Agents-Foundry/prototypes/actions/runs/39159170701), and [Prototype Gallery Pages](https://github.com/Agents-Foundry/prototypes/actions/runs/39159170747). These are workflow conclusions, not proof of independent manual acceptance.
+- **Artifact provenance:** `gallery-browser-qa` uploaded 2026-10-18 19:32 UTC; GitHub reports expiration 2026-11-01 19:32 UTC. The artifact was **not downloaded, visually inspected, or independently attested** for this record. Preserve required evidence before expiration.
+- **Explicit limits:** No independent security/privacy review, manual assistive-technology testing, actual browser zoom/reflow measurement, full visual baseline comparison, product-owner approval, or final design freeze is established by these checks. The seven selector scenarios and 32 screen examples are illustrative mockups, not production workflows.
 
 ## Primary reviewer assessment
 
