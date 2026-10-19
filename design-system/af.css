@@ -1,10 +1,10 @@
 /* Agents Foundry design system — Direction C (proposal, review pending). No external fonts or network. */
 :root{
-  --canvas:#F7F9FC;--surface:#fff;--surface-2:#F1F4F9;--nav:#101827;--nav-2:#1B2538;--nav-text:#B7C5DB;--nav-active:#2D2A66;
-  --primary:#5148E5;--primary-ink:#fff;--accent:#7C5CFA;--primary-soft:#EEEDFD;
+  --canvas:#F5F7FB;--surface:#fff;--surface-2:#F1F4F9;--nav:#17213F;--nav-2:#222D4D;--nav-text:#B7C5DB;--nav-active:#3A3380;
+  --primary:#6150EC;--primary-ink:#fff;--accent:#7C5CFF;--primary-soft:#F0EDFF;
   --success:#0A7A55;--success-ink:#fff;--danger-ink:#fff;--success-soft:#E3F6EE;--warn:#8A4B05;--warn-soft:#FEF3DC;--danger:#B42318;--danger-soft:#FDECEA;--info:#0B5C99;--info-soft:#E3F1FB;
   --text:#172033;--muted:#5B6B82;--border:#E2E8F0;--border-strong:#CBD5E1;--focus:#7C5CFA;
-  --r1:10px;--r2:14px;--r3:18px;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
+  --r1:12px;--r2:14px;--r3:18px;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;
   --shadow:0 1px 2px rgba(16,24,39,.06),0 4px 14px rgba(16,24,39,.05);
   --font:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace;
   color-scheme:light;
@@ -32,7 +32,7 @@ code,.mono{font-family:var(--mono);font-size:12.5px}
 .app{display:grid;grid-template-columns:256px minmax(0,1fr);min-height:100vh}
 .rail{background:var(--nav);color:var(--nav-text);padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;gap:4px}
 .brand{display:flex;align-items:center;gap:10px;color:#fff;padding:4px 8px 2px;font-weight:700;font-size:16px}
-.brand .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#5148E5,#7C5CFA);display:grid;place-items:center;font-size:14px}
+.brand .mark{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#6F5CF1,#4BA8FF);display:grid;place-items:center;font-size:14px}
 .surface-chip{margin:2px 8px 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#A9B7CE}
 .tenant{margin:0 4px 12px;padding:10px 12px;border-radius:var(--r1);background:var(--nav-2);color:#E4EBF7;font-size:12.5px}
 .tenant b{display:block;font-size:13.5px;color:#fff}
