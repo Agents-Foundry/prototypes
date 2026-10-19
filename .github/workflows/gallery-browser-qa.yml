@@ -1,0 +1,45 @@
+name: Gallery Browser and Accessibility QA
+on:
+  pull_request:
+    paths:
+      - 'prototype-gallery/**'
+      - '.github/workflows/gallery-browser-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'prototype-gallery/**'
+      - '.github/workflows/gallery-browser-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  playwright-axe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+        working-directory: prototype-gallery
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+        working-directory: prototype-gallery
+      - name: Browser and accessibility tests
+        run: npm run test:e2e
+        working-directory: prototype-gallery
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gallery-browser-qa
+          path: |
+            prototype-gallery/playwright-report
+            prototype-gallery/test-results
+          if-no-files-found: ignore
+          retention-days: 14
