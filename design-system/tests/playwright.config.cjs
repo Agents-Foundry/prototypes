@@ -6,7 +6,7 @@ module.exports = defineConfig({
   testDir: '.',
   testMatch: /.*\.spec\.cjs/,
   timeout: 240000,
-  reporter: [['list']],
+  reporter: [['list'], ['html', { outputFolder: 'playwright-report', open: 'never' }]],
   workers: 1,
   use: {
     viewport: { width: 1280, height: 900 },
