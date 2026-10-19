@@ -57,6 +57,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: prototype-apps-test-results
-          path: design-system/tests/test-results/
-          if-no-files-found: ignore
+          path: |
+            design-system/tests/playwright-report/
+            design-system/tests/test-results/
+          if-no-files-found: error
           retention-days: 14
