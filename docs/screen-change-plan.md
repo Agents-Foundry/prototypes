@@ -93,7 +93,27 @@ Facts the screens must respect (all from files I read):
 | D11 | Google-mode deployments | **Design a Google-mode admin experience** | New platform work: admin routes and role mapping for Google identities (today the identity directory is file-managed and `/api/organization/*` is password-mode only). Drawn as Proposed, with ORG-040 added |
 | D12 | Visual language | **Match the shipped screens exactly** | The prototype design system must be re-tokened to the shipped look (Inter, `#6f5cf1`, shipped card and button styles, the employee app's dark sidebar and violet-to-blue gradient) and shipped components reproduced; only the flows change. This needs one more reading pass over the shipped component styles before any screen is redrawn |
 
-### Tensions I need you to confirm
+### Decisions D13–D27 (answers to the later question rounds)
+
+| # | Topic | Decision | Implication |
+| --- | --- | --- | --- |
+| D13 | Earlier decision records (EMP-DEC-01–10, PLT-DEC, DEC-01–08) | **Revalidate each against the platform and keep what holds** | A traceability table marks every decision Confirmed, Superseded or Conflicts; only Confirmed ones guide screens |
+| D14 | Operator sign-in | **Separate operator identity with a hardware key** | PLT-001 is its own identity system; no tenant session reaches it; consistent with "support access is never inferred from admin status" |
+| D15 | Data region | **Remove it; show the deployment region read-only** | No per-tenant region field anywhere; the pilot's `asia-south1` appears only as deployment info |
+| D16 | Billing and plans | **Model the editions as Planned entitlements with real limits** | Active operators, concurrent sandboxes, execution minutes, artifact GiB and retention shown as plan limits, all Planned or early access; no checkout; SAML and SCIM are not offered as plan features |
+| D17 | Expansion roles | **Browsable catalog marked "Expansion role", not installable** | The 50 website roles appear as illustrations; no flows are drawn for them |
+| D18 | Legal hold | **Show the class read-only; placing a hold is a Planned admin action** | Artifacts display "Legal hold"; a Planned screen shows who may place or lift one |
+| D19 | Google-mode admin, day one | **All four:** map Google identities to ADMIN or EMPLOYEE; structure, people and positions; install blueprints and create agents; governance and spending panels | ORG-040 covers identity mapping; the other panels reuse the password-mode screens, marked Proposed for Google mode |
+| D20 | Threads | **Multiple active runs per thread** | Changes the one-active-run invariant (`THREAD_HAS_ACTIVE_RUN`, ADR 0008, 0014) |
+| D21 | Shared workspace | **Runs queue for the workspace; show "waiting for workspace"** | A new run state or step reason for waiting on a busy workspace; ties to `WORKSPACE_BUSY`; needs the same ADR as D2 or a sibling one |
+| D22 | Provisioning requests | **Stay admin-approved** | D2/D3 cover governed actions only |
+| D23 | Override precedence | **The stricter approver always wins** | Admin beats employee; an organization can only raise an action to admin, and the manifest cannot lower it |
+| D24 | Admin layout | **Keep shipped components and add per-screen navigation** | Each shipped panel becomes a screen reached from the left list; styling matches the shipped look |
+| D25 | Status badges | **Badge every screen and every unbuilt option** | Resolves the D1 vs D8 tension: Implemented, Partial, Planned, Proposed rule |
+| D26 | Loss of independent review for MEDIUM actions | **Accepted as a deliberate product decision, documented in the ADR** | The ADR states the trade-off; payload binding, expiry, single use and audit remain |
+| D27 | ADR ownership | **You author the ADR in `employee-agent-platform`; I draft the text** | A draft is in [`docs/adr-draft-employee-approval.md`](adr-draft-employee-approval.md) |
+
+### Tensions I needed you to confirm (now resolved by D1–D27)
 
 1. **D1 vs D8.** "Labelled roadmap" and "design breadth fully" can conflict. I will resolve it with a **status badge on every screen and every unbuilt option** (Implemented / Partial / Planned / Proposed rule), so breadth is interactive but nothing implies it exists. Confirm.
 2. **D2/D3 tighten-only.** The platform rule says organization overrides may only tighten. I propose that an organization can move any action from "employee may approve" up to "admin approves", never the reverse. You did not choose a kill-switch (D4), but this is the existing tighten-only principle, not a new guard. Confirm.
@@ -357,7 +377,9 @@ Real today: read-only catalog, digests, pinned tools/skills/workflows, governanc
 
 ## 10. Open questions and what I did not read
 
-**Questions still open (I will not assume):**
+**Questions: all answered (see D1–D27).** The list below is kept as the record of what was asked; items marked resolved map to a decision above. Two follow-ups remain that are work, not questions: the traceability table for D13, and one more reading pass over the shipped component styles for D12.
+
+**Original question list (for the record):**
 
 1. Confirm the five tensions in §3 (including whether D2 also covers agent provisioning requests).
 2. D2 changes a security invariant enforced in two places (route role check and the self-approval check). **Resolved in part by D9:** the approver class is platform policy by action and risk with a tighten-only organization override. **Still open:** who owns the ADR in the platform repository, and the exact precedence for an organization override on an action the manifest already restricts.
