@@ -373,6 +373,10 @@ Every earlier decision record is itself **Pending / not approved** (sprint evide
 
 **Result (28 records):** 6 Confirmed (DEC-05 for its binding rules only), 16 Partial, 3 Superseded in whole or part, 3 "Not in platform" (found no evidence by keyword search; a search can miss things, so the owner should confirm). The one wording conflict is EMP-DEC-10's "idempotent retry". Counts are mine and unreviewed.
 
+## 7c. Owner confirmation (chat, 2026-10-19)
+
+In chat the product owner confirmed that PLT-DEC-05, DEC-01 and DEC-02 stay as Proposed screens (platform has no such capability today), and approved this plan so Phase 1 could start. This is a chat statement recorded here, not a formal sign-off: it is not a security, accessibility or visual review and not a design freeze. The other 7a verdicts were not individually itemised in that answer.
+
 ## 7b. Shipped visual language (D12 read, done)
 
 Read from `apps/control-plane-web/src/app/app.scss` and `apps/employee-desktop/src/app/app.scss` (both at the pinned SHA). The shipped apps define no CSS variables; colors are literals in component styles.
