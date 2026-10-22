@@ -1,14 +1,14 @@
 /* Agent Studio screens 3: review, publish, rollback, analytics, custom skills, settings */
 const S3=window.SCREENS,{ui:V,esc:X}=AF;
 
-S3['STD-014']={title:'Review queue',group:'Release',navId:'STD-014',permission:'blueprint.review',
+S3['STD-014']={title:'Review queue',status:'planned',group:'Release',navId:'STD-014',permission:'blueprint.review',
   lead:'Blueprints waiting for an independent decision. Authors never review their own work.',
   state:{tab:'mine'},emptyText:'No reviews are waiting for you. New requests appear here when authors submit a draft.',
   render(c){const t=c.s.tab;const all=[['Release Assistant','1.0.0-rc1','Priya Nair','Security · Evaluation','4 h','mine'],['QA Engineer','2.1.0','Priya Nair','Security · Policy','1 d','mine'],['HR Assistant','0.5.0','Dana Kim','Policy · Evaluation','2 d','others'],['Support Triage','1.3.0','Sana Iqbal','Security','3 d','mine']];
     const rows=all.filter(r=>t==='all'||r[5]===t||(t==='mine'&&r[5]==='mine'));
     return `${V.tabs('tab',t,[['mine','Assigned to me (3)'],['others','Assigned to others'],['all','All']])}${V.card('',V.table(['Blueprint','Version','Requested by','Reviews needed','Waiting',''],rows.map(r=>[`<b>${r[0]}</b>`,`<code>${r[1]}</code>`,r[2],V.chips(r[3].split(' · ')),`${r[4]} ${r[4].endsWith('d')&&parseInt(r[4])>=3?V.badge('SLA risk','warn'):''}`,`<a class="btn sm" href="#/STD-015">Open</a>`]),{caption:'Review requests'}),{flush:true})}`}};
 
-S3['STD-015']={title:'Review & decision',group:'Release',navId:'STD-014',permission:'blueprint.review',
+S3['STD-015']={title:'Review & decision',status:'planned',group:'Release',navId:'STD-014',permission:'blueprint.review',
   lead:'Release Assistant 1.0.0-rc1 · requested by Priya Nair 4 hours ago.',
   state:{viewer:'reviewer',c1:false,c2:false,c3:false,comment:'',decided:''},noEmpty:true,
   spec:{goal:'Record an independent decision with evidence.',states:['pending','changes requested','approved','rejected','author viewing (blocked)','stale (new commits)'],security:'The server must reject approval by the author or by anyone without review permission. The UI blocks it too, but UI state is not enforcement.'},
@@ -18,7 +18,7 @@ S3['STD-015']={title:'Review & decision',group:'Release',navId:'STD-014',permiss
     <aside class="sidepanel">${V.card('Decision',`${author?V.notice('bad','You are the author','You cannot approve your own blueprint. Ask an independent reviewer.'):''}${s.decided?V.notice('ok','Decision recorded (simulated)',X(s.decided)+'. Audit event would be written by the server.'):''}${!ready&&!author?V.notice('warn','Complete the checklist','Approve is enabled after all three checks are reviewed.'):''}
       <div style="display:grid;gap:8px">${V.btn('Approve','primary',`${author||!ready||s.decided?'disabled':'data-write data-sim="Approve Release Assistant 1.0.0-rc1 for publishing" data-title="Approve" data-after="decided=Approved"'}`)}${V.btn('Request changes','',`${author||s.decided?'disabled':'data-write data-sim="Request changes and notify the author" data-title="Request changes" data-after="decided=Changes requested"'}`)}${V.btn('Reject','danger',`${author||s.decided?'disabled':'data-write data-sim="Reject this version" data-title="Reject" data-risk="The author will be notified and the version cannot be published." data-confirm="reject" data-after="decided=Rejected"'}`)}</div>`)}</aside></div>`}};
 
-S3['STD-016']={title:'Publish & rollout',group:'Release',navId:'STD-016',permission:'blueprint.publish',
+S3['STD-016']={title:'Publish & rollout',status:'planned',group:'Release',navId:'STD-016',permission:'blueprint.publish',
   lead:'Release an approved version gradually. Publishing changes what organization admins can hire; running employees update only when they choose.',
   state:{step:0,stage:'canary',demoPass:false},noEmpty:true,
   spec:{goal:'Publish safely with staged rollout and a clear rollback path.',states:['blocked by gate','scheduled','rolling out','paused','failed','completed'],security:'Publishing requires an independent approval and a fresh authorization; the server records who published which version.'},
@@ -48,7 +48,7 @@ S3['STD-018']={title:'Usage & feedback',group:'Insight & admin',navId:'STD-018',
     <div class="split-eq">${V.card('Daily runs',V.bars(bars,'Daily runs')+'<div class="legend" style="margin-top:8px"><span>14 days</span></div>')}${V.card('Top reasons runs stop',V.list([['Approval denied or expired','34%'],['Environment unavailable','22%'],['Jira permission missing','18%'],['Test flakiness','11%']].map(([t,p])=>({title:t,right:`<b>${p}</b>`}))))}</div>
     <div style="height:16px"></div>${V.card('Feedback themes',V.table(['Theme','Mentions','Sentiment'],[['“Wants to preview the defect before it is created”','42',V.badge('Mixed','warn')],['“Evidence screenshots are helpful”','37',V.badge('Positive','ok')],['“Too many approval prompts for read steps”','19',V.badge('Negative','bad')]]),{flush:true})}`}};
 
-S3['STD-019']={title:'Custom skills',group:'Insight & admin',navId:'STD-019',permission:'skill.create',
+S3['STD-019']={title:'Custom skills',status:'planned',group:'Insight & admin',navId:'STD-019',permission:'skill.create',
   lead:'Package a repeatable capability. Custom skills can only use scopes an organization admin has already approved.',
   state:{name:'',desc:'',sc_jira:true,sc_repo:false,sc_browser:false,tab:'list'},noEmpty:true,
   render(c){const s=c.s;

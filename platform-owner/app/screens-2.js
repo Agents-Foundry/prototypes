@@ -9,7 +9,7 @@ S['PLT-007']={title:'Tenant invitation & handoff',group:'Organizations',navId:'P
     return `${U.card('',U.table(['Organization','Invitee','Status','Detail',''],rows.map(r=>[`<b>${r[0]}</b>`,r[1],U.badge(r[2],r[4]),r[3],r[2]==='Pending'||r[2]==='Expired'?`<span class="actions">${U.btn(r[2]==='Expired'?'Reissue':'Resend','sm','data-write data-sim="Send a new one-time invitation to '+r[1]+'. Earlier links stop working." data-title="Send invitation"')}${r[2]==='Pending'?U.btn('Revoke','sm','data-write data-sim="Revoke the invitation" data-title="Revoke invitation" data-risk="The link stops working immediately." data-confirm="revoke"'):''}</span>`:U.btn('Details','sm',`data-set="open=${r[0]}"`)]),{caption:'Invitations'}),{flush:true})}
     ${s.open?U.drawer(s.open+' · handoff',U.timeline([{tone:'ok',title:'Invitation sent'},{tone:'ok',title:'Admin accepted and set up MFA'},{tone:'ok',title:'Domain verified'},{tone:'wait',title:'First AI employee hired',sub:'Optional'}])+U.notice('info','Handoff complete when','the admin has MFA and a verified domain. You do not get ongoing access.'),'open'):''}`}};
 
-S['PLT-008']={title:'Plans & entitlements',group:'Commercial',navId:'PLT-008',permission:'plans.view',
+S['PLT-008']={title:'Plans & entitlements',status:'planned',group:'Commercial',navId:'PLT-008',permission:'plans.view',
   lead:'Offer plans and set what each includes. Changes to a tenant take effect after review and never reduce limits below current use without notice.',
   state:{org:'Aster Digital',plan:'Growth'},noEmpty:true,
   render(c){const s=c.s;const plans=[['Trial','$0','10 seats · 1 AI employee · 14 days'],['Starter','$180','25 seats · 3 AI employees'],['Growth','$1,240','100 seats · 10 AI employees'],['Enterprise','Custom','Unlimited seats · SSO/SCIM · dedicated region']];
@@ -17,7 +17,7 @@ S['PLT-008']={title:'Plans & entitlements',group:'Commercial',navId:'PLT-008',pe
     <div class="split-eq">${U.card('Change a tenant’s plan',`${U.select('Organization',{bind:'org',value:s.org,options:D.orgs.map(o=>o.name)})}${U.select('New plan',{bind:'plan',value:s.plan,options:plans.map(p=>p[0])})}${s.plan==='Starter'?U.notice('warn','Over limit','Aster Digital has 12 users and 2 AI employees; Starter allows 3. OK. Check Vertex Works (31 users) before downgrading.'):''}${U.btn('Request change','primary','data-write data-sim="Plan change requested; the tenant is notified before it applies" data-title="Change plan"')}`)}
     ${U.card('Entitlement checks',U.list([{lead:'<span class="badge ok">✓</span>',title:'Seats within limit',sub:'On all active tenants'},{lead:'<span class="badge warn">!</span>',title:'2 tenants near AI employee limit',sub:'Notify account owners'},{lead:'<span class="badge ok">✓</span>',title:'No tenant above plan ceilings'}]))}</div>`}};
 
-S['PLT-009']={title:'Billing operations',group:'Commercial',navId:'PLT-009',permission:'billing.view',
+S['PLT-009']={title:'Billing operations',status:'planned',group:'Commercial',navId:'PLT-009',permission:'billing.view',
   lead:'Invoices and payment health. Billing staff see commercial data only, never tenant content.',
   state:{tab:'attention',open:''},emptyText:'No invoices to show.',
   render(c){const s=c.s;const all=[['INV-4418','Vertex Works','$1,240','Failed (2nd attempt)','bad','attention'],['INV-4412','Aster Digital','$180','Disputed','warn','attention'],['INV-4409','Helix Systems','$9,800','Paid','ok','all'],['INV-4405','Codifyd','$1,240','Paid','ok','all']];
@@ -41,7 +41,7 @@ S['PLT-011']={title:'Global blueprint catalog',group:'Agent catalog',navId:'PLT-
     return `${U.card('',U.table(['Blueprint','Version','Status','Adopted by','Author',''],bp.map(b=>[`<b>${b[0]}</b>`,`<code>${b[1]}</code>`,U.badge(b[2],tn[b[2]]),b[3]+' orgs',b[4],U.btn('Open','sm',`data-set="open=${b[0]}"`)]),{caption:'Blueprints'}),{flush:true})}
     ${s.open?U.drawer(s.open,`${U.kv([['Latest version',bp.find(b=>b[0]===s.open)[1]],['Status',bp.find(b=>b[0]===s.open)[2]],['Safety suites','3 of 3 passing'],['Independent review','Completed (simulated)']])}<div class="actions" style="margin-top:14px"><a class="btn sm" href="#/PLT-012">Rollouts</a>${U.btn('Restrict availability','sm','data-write data-sim="Restrict this blueprint to selected organizations" data-title="Restrict blueprint" data-risk="Organizations that cannot see it can no longer hire new employees from it." data-confirm="restrict"')}</div>`,'open'):''}`}};
 
-S['PLT-012']={title:'Blueprint rollout management',group:'Agent catalog',navId:'PLT-012',permission:'rollouts.manage',
+S['PLT-012']={title:'Blueprint rollout management',status:'planned',group:'Agent catalog',navId:'PLT-012',permission:'rollouts.manage',
   lead:'Controlled availability: staged, pausable and reversible. Watch error rate before widening.',
   state:{paused:false},emptyText:'No rollouts are active.',
   render(c){const s=c.s;

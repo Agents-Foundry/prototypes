@@ -5,7 +5,7 @@ const st={Active:'ok',Onboarding:'info',Suspended:'bad',Trial:'warn'};
 const org=c=>D.orgs.find(o=>o.id===(c.shared.org||'codifyd'));
 const prov=c=>c.shared.prov||(c.shared.prov={name:'',slug:'',region:'India',plan:'Starter',admin:'',step:0,submitted:false});
 
-S['PLT-001']={title:'Operator sign-in',bare:true,group:'Access',permission:'platform.access',noEmpty:true,
+S['PLT-001']={title:'Operator sign-in',status:'planned',bare:true,group:'Access',permission:'platform.access',noEmpty:true,
   state:{step:0,view:'normal'},
   spec:{persona:'Platform operator',goal:'Strong authentication for staff who can affect all tenants.',states:['sign-in','hardware key / MFA','recovery','denied','locked','step-up required'],security:'Phishing-resistant MFA required; sessions are short; no tenant data is reachable from this console by default.'},
   render(c){const s=c.s;let b;
@@ -57,7 +57,7 @@ S['PLT-005']={title:'Provision a tenant',group:'Organizations',navId:'PLT-005',p
     if(p.step===3)body=U.card('Review request',U.kv([['Organization',E(p.name)],['Slug',`<code>${E(p.slug)}</code>`],['Region',E(p.region)],['Plan',E(p.plan)],['First admin',E(p.admin)]])+U.notice('warn','Approval required','Another operator must approve. Submitting does not create a tenant.'));
     return `${U.steps(labels,p.step)}${body}<div class="actions" style="margin-top:14px">${U.btn('Back','',p.step===0?'disabled':`data-set="$prov.step=${p.step-1}"`)}${p.step<3?U.btn('Continue','primary',okStep?`data-set="$prov.step=${p.step+1}"`:'disabled'):U.btn('Submit for approval','primary','data-write data-sim="Provisioning request submitted for independent approval" data-title="Submit request" data-after="$prov.submitted=true"')}${p.submitted?U.btn('View approvals →','','data-go="PLT-006"'):''}</div>`}};
 
-S['PLT-006']={title:'Provisioning review & approval',group:'Organizations',navId:'PLT-006',permission:'tenants.approve',
+S['PLT-006']={title:'Provisioning review & approval',status:'planned',group:'Organizations',navId:'PLT-006',permission:'tenants.approve',
   lead:'Independent review of tenant requests. You cannot approve a request you submitted.',
   state:{sel:'northwind'},emptyTitle:'No requests',emptyText:'Submitted provisioning requests appear here.',
   render(c){const s=c.s;const p=c.shared.prov;
