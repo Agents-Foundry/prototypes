@@ -37,6 +37,10 @@ const SCENARIOS=[['normal','Normal'],['loading','Loading'],['empty','Empty'],['e
 let cfg,cur,scenario='normal',store={},shared={},simLog=[],lastFocus=null;
 const $=s=>document.querySelector(s);
 
+/* D25: every screen carries a build-status badge. Default is "proposed" (nothing is approved). */
+const STATUS={implemented:['ok','Implemented in platform'],partial:['info','Partial in platform'],planned:['warn','Planned'],proposed:['brand','Proposed']};
+function statusBadge(s){const k=STATUS[s]?s:'proposed';return `<span class="badge ${STATUS[k][0]}" data-status="${k}">${STATUS[k][1]}</span>`}
+
 function applyTheme(t){document.documentElement.setAttribute('data-theme',t);safe.set('af-theme',t)}
 function initTheme(){const s=safe.get('af-theme');applyTheme(s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'))}
 
@@ -126,7 +130,7 @@ function render(nav){
   $('#rail').style.display=sc.bare?'none':'';
   let body;
   try{body=scenarioBody(sc,ctx)}catch(e){body=ui.notice('bad','This prototype screen failed to render',esc(e.message))}
-  const head=sc.bare&&scenario==='normal'?'':`<div class="pagehead"><div><div class="sid">${esc(cur)}${sc.group?' · '+esc(sc.group):''}</div><h1 id="h1" tabindex="-1">${esc(sc.title)}</h1>${sc.lead?`<p class="lead">${sc.lead}</p>`:''}</div><div class="actions">${scenario==='normal'||scenario==='stale'||scenario==='offline'||scenario==='unknown'?(sc.actions?sc.actions(ctx):''):''}</div></div>`;
+  const head=sc.bare&&scenario==='normal'?'':`<div class="pagehead"><div><div class="sid">${esc(cur)}${sc.group?' · '+esc(sc.group):''} ${statusBadge(sc.status)}</div><h1 id="h1" tabindex="-1">${esc(sc.title)}</h1>${sc.lead?`<p class="lead">${sc.lead}</p>`:''}</div><div class="actions">${scenario==='normal'||scenario==='stale'||scenario==='offline'||scenario==='unknown'?(sc.actions?sc.actions(ctx):''):''}</div></div>`;
   const main=$('#main');main.innerHTML=head+body;
   if(['offline','unknown'].includes(scenario))main.querySelectorAll('[data-write]').forEach(el=>{el.disabled=true;el.title='Unavailable in this scenario: changes are blocked (fail-closed)'});
   if(sc.init&&['normal','stale','offline','unknown'].includes(scenario)){try{sc.init(main,ctx)}catch(e){}}
