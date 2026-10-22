@@ -1,7 +1,7 @@
 /* Agent Studio screens 2: knowledge, model/policy, autonomy, playground, evaluations, versions */
 const S2=window.SCREENS,{ui:U,esc:E}=AF;
 
-S2['STD-007']={title:'Knowledge & memory',group:'Build',navId:'STD-007',permission:'blueprint.edit',
+S2['STD-007']={title:'Knowledge & memory',status:'planned',group:'Build',navId:'STD-007',permission:'blueprint.edit',
   lead:'Choose what the agent may read and what it may remember. Every source has an owner, sensitivity and freshness.',
   state:{remember:true,redact:true,retention:'30'},
   spec:{goal:'Control knowledge sources and memory provenance.',states:['default','source stale','source blocked by policy','memory disabled','denied']},

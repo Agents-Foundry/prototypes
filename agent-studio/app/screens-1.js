@@ -47,7 +47,7 @@ S['STD-002']={title:'Blueprint catalog',group:'Blueprints',navId:'STD-002',permi
     <div class="toolbar"><div class="grow">${ui.input('Search blueprints',{bind:'q',value:s.q,ph:'Name, department or owner'})}</div><div>${ui.select('Status',{bind:'status',value:s.status,options:[['all','All statuses'],'Published','In review','Draft','Deprecated']})}</div></div>
     ${ui.card('',rows.length?ui.table(['Blueprint','Department','Version','Status','Owner','Hired by','Updated'],rows.map(b=>({attrs:`data-go="STD-004"`,cells:[`<a href="#/STD-004"><b>${b.name}</b></a>`,b.dept,`<code>${b.ver}</code>${b.next?` <small class="muted">→ ${b.next}</small>`:''}`,ui.badge(b.status,tone[b.status]),b.owner,b.orgs?`${b.orgs} orgs`:'—',b.upd]})),{caption:'Blueprints'}):ui.empty('No blueprints match','Try a different search or clear the status filter.',ui.btn('Clear filters','','data-set="q="')),{flush:true})}`}};
 
-S['STD-003']={title:'Create blueprint',group:'Blueprints',navId:'STD-003',permission:'blueprint.create',
+S['STD-003']={title:'Create blueprint',status:'planned',group:'Blueprints',navId:'STD-003',permission:'blueprint.create',
   lead:'Start from an approved template. New blueprints begin with no privileged tools and fail-closed policy.',
   state:{tpl:'qa',name:'',dept:'Engineering',purpose:'',tried:false},noEmpty:true,
   spec:{goal:'Create a draft blueprint with a safe baseline.',states:['pristine','validation error','created','name conflict','denied'],security:'New drafts start with least privilege: read-only tools, no external writes, fail-closed on denied actions.'},

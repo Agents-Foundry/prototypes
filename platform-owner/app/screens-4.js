@@ -12,7 +12,7 @@ S['PLT-019']={title:'Policy template management',group:'Governance',navId:'PLT-0
     ${s.tab==='conflicts'?U.notice('warn','Effective policy conflict','Helix Systems has a custom rule that allows Slack posts without approval. It is weaker than “External writes need approval v5”. The platform rule wins; the tenant rule is ignored and the admin is notified.')+U.btn('Notify tenant admin','sm','data-write data-sim="Notification sent to Helix Systems administrators" data-title="Notify tenant"'):''}
     ${s.open?U.drawer(s.open,`${U.kv([['Version',t.find(r=>r[0]===s.open)[1]],['State',t.find(r=>r[0]===s.open)[2]],['On evaluation failure','Fail closed']])}<h3 style="margin:14px 0 6px">Changes in this version</h3>${U.diff(['@@ rules @@','- allow write if environment != "production"','+ allow write if environment != "production" and approval.single_use']) }<div class="actions" style="margin-top:12px">${U.btn('Publish to all tenants','primary sm','data-write data-sim="Publish template; tenants inherit within minutes" data-title="Publish template" data-risk="Affects every tenant immediately; rollback is available." data-confirm="publish policy"')}${U.btn('Roll back','sm','data-write data-sim="Roll back to the previous version" data-title="Roll back"')}</div>`,'open'):''}`}};
 
-S['PLT-020']={title:'Platform staff & roles',group:'Governance',navId:'PLT-020',permission:'staff.manage',
+S['PLT-020']={title:'Platform staff & roles',status:'planned',group:'Governance',navId:'PLT-020',permission:'staff.manage',
   lead:'Who on our side can do what. Access is least-privilege, reviewed quarterly and revoked immediately when someone leaves.',
   state:{open:'',q:''},emptyText:'No staff yet.',
   actions:()=>U.btn('Invite staff','primary','data-write data-sim="Invitation sent; hardware key enrollment required on first sign-in" data-title="Invite staff"'),
@@ -30,7 +30,7 @@ S['PLT-021']={title:'Operator settings',group:'Settings',navId:'PLT-021',permiss
     ${s.tab==='defaults'?U.card('Defaults',`${U.select('Default region for new tenants',{bind:'region',value:s.region,write:true,options:['India','EU','US']})}<p class="muted"><small>Applies to the provisioning wizard only; each tenant still chooses explicitly.</small></p>`):''}
     ${s.tab==='security'?U.card('Managed by security',U.kv([['Session length','4 hours'],['Hardware key required','Yes (all operators)'],['Audit retention','7 years, immutable'],['IP allow-list','Corporate network only']])+U.notice('info','Read-only','Contact the security team to change these.')):''}`}};
 
-S['PLT-022']={title:'Tenant suspension & termination review',group:'Organizations',navId:'PLT-022',permission:'tenants.lifecycle',
+S['PLT-022']={title:'Tenant suspension & termination review',status:'planned',group:'Organizations',navId:'PLT-022',permission:'tenants.lifecycle',
   lead:'High-risk lifecycle changes. Each step shows its effect before it happens, and needs an independent approver.',
   state:{action:'suspend',step:0,reason:'Non-payment (2 failed attempts)',hold:false},noEmpty:true,
   spec:{goal:'Suspend or terminate a tenant safely with reason, impact, independent approval and quarantine before deletion.',states:['reason','impact','approval','quarantine','completed','failed','blocked by legal hold'],security:'Two-person rule. Termination is delayed and recoverable during quarantine; legal hold blocks deletion.'},

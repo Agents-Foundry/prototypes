@@ -31,7 +31,7 @@ S['PLT-026']={title:'Model providers',group:'Agent catalog',navId:'PLT-026',perm
     ${s.tab==='providers'?U.card('',U.table(['Provider','Regions','Credentials','Status',''],[['Anthropic','India, EU, US','Platform-managed',U.badge('Enabled','ok'),U.btn('Rotate key','sm','data-write data-sim="Key rotation needs a second operator" data-title="Rotate key" data-risk="In-flight requests continue on the old key until verified." data-confirm="rotate"')],['OpenAI','EU, US','Platform-managed',U.badge('Degraded (EU)','warn'),U.btn('Rotate key','sm','data-write data-sim="Key rotation needs a second operator" data-title="Rotate key" data-risk="In-flight requests continue on the old key until verified." data-confirm="rotate"')],['Local endpoints','Tenant-hosted','Tenant-managed',U.badge('Approved','ok'),'']],{caption:'Providers'}),{flush:true}):''}
     ${s.tab==='models'?U.card('',U.table(['Model','Context','Cost tier','Tool calling','Availability'],[['Large reasoning','200k','High',U.badge('Yes','ok'),'All regions'],['Balanced','200k','Medium',U.badge('Yes','ok'),'All regions'],['Fast','128k','Low',U.badge('Yes','ok'),'India, EU'],['Local 8B','32k','—',U.badge('Limited','warn'),'Tenant-hosted']]),{flush:true}):''}`}};
 
-S['PLT-027']={title:'Compliance & data requests',group:'Governance',navId:'PLT-027',permission:'compliance.manage',
+S['PLT-027']={title:'Compliance & data requests',status:'planned',group:'Governance',navId:'PLT-027',permission:'compliance.manage',
   lead:'Legal holds and data-subject requests across tenants. Operators coordinate; tenants’ own admins execute actions on their data.',
   state:{tab:'requests'},emptyTitle:'No open requests',emptyText:'Requests appear here when a customer or authority files one.',
   render(c){const s=c.s;
@@ -39,7 +39,7 @@ S['PLT-027']={title:'Compliance & data requests',group:'Governance',navId:'PLT-0
     ${s.tab==='requests'?U.card('',U.table(['Request','Organization','Type','Due','State',''],[['DSR-882','Helix Systems','Data export','in 12 d',U.badge('In progress','info'),U.btn('Open','sm','data-sim="Open request; the tenant admin performs the export" data-title="Request"')],['DSR-880','Codifyd','Deletion','in 3 d',U.badge('Due soon','warn'),U.btn('Open','sm','data-sim="Open request" data-title="Request"')],['DSR-871','Aster Digital','Access','Done',U.badge('Completed','ok'),'']],{caption:'Data requests'}),{flush:true}):''}
     ${s.tab==='holds'?U.card('Active legal holds',U.table(['Organization','Reason','Since','Effect'],[['Vertex Works','Litigation (ref hidden)','2026-09-01','Deletion blocked']]),{flush:true})+U.notice('info','Why this matters','A hold overrides retention and termination deletion until lifted by Legal.'):''}`}};
 
-S['PLT-028']={title:'Status & maintenance',group:'Overview',navId:'PLT-028',permission:'status.manage',
+S['PLT-028']={title:'Status & maintenance',status:'planned',group:'Overview',navId:'PLT-028',permission:'status.manage',
   lead:'What customers see on the status page, and planned maintenance windows. Public updates need a second approver.',
   state:{tab:'status',draft:''},emptyText:'No maintenance is scheduled.',
   render(c){const s=c.s;
