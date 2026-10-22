@@ -130,7 +130,7 @@ function render(nav){
   $('#rail').style.display=sc.bare?'none':'';
   let body;
   try{body=scenarioBody(sc,ctx)}catch(e){body=ui.notice('bad','This prototype screen failed to render',esc(e.message))}
-  const head=sc.bare&&scenario==='normal'?'':`<div class="pagehead"><div><div class="sid">${esc(cur)}${sc.group?' · '+esc(sc.group):''} ${statusBadge(sc.status)}</div><h1 id="h1" tabindex="-1">${esc(sc.title)}</h1>${sc.lead?`<p class="lead">${sc.lead}</p>`:''}</div><div class="actions">${scenario==='normal'||scenario==='stale'||scenario==='offline'||scenario==='unknown'?(sc.actions?sc.actions(ctx):''):''}</div></div>`;
+  const head=sc.bare&&scenario==='normal'?`<div class="bare-build-status" aria-label="Build status">${statusBadge(sc.status)}</div>`:`<div class="pagehead"><div><div class="sid">${esc(cur)}${sc.group?' · '+esc(sc.group):''} ${statusBadge(sc.status)}</div><h1 id="h1" tabindex="-1">${esc(sc.title)}</h1>${sc.lead?`<p class="lead">${sc.lead}</p>`:''}</div><div class="actions">${scenario==='normal'||scenario==='stale'||scenario==='offline'||scenario==='unknown'?(sc.actions?sc.actions(ctx):''):''}</div></div>`;
   const main=$('#main');main.innerHTML=head+body;
   if(['offline','unknown'].includes(scenario))main.querySelectorAll('[data-write]').forEach(el=>{el.disabled=true;el.title='Unavailable in this scenario: changes are blocked (fail-closed)'});
   if(sc.init&&['normal','stale','offline','unknown'].includes(scenario)){try{sc.init(main,ctx)}catch(e){}}
@@ -186,7 +186,7 @@ function toast(msg){const t=document.createElement('div');t.className='toast';t.
 function openSpec(){
   lastFocus=document.activeElement;const sc=cfg.screens[cur];const sp=sc.spec||{};
   $('#overlay').innerHTML=`<aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="st"><div class="toolbar"><h2 class="grow" id="st">Screen spec · ${esc(cur)}</h2><button class="btn sm" type="button" id="sx">Close</button></div>
-  ${ui.notice('info','Status: proposed','This screen is a design proposal. It has not been reviewed or approved, and the prototype does not enforce any policy.')}
+  ${ui.notice('info','Build status: '+(STATUS[sc.status]?sc.status:'proposed'),'This label describes platform implementation status, not design approval. This screen remains a design proposal; no independent review or policy enforcement is implied.')}
   ${ui.kv([['Screen',esc(sc.title)],['Persona',esc(sp.persona||cfg.persona||'')],['Goal',esc(sp.goal||sc.lead||'')],['Permission',`<code>${esc(sc.permission||'resource.view')}</code>`],['States',esc((sp.states||['normal','loading','empty','error','denied','offline','unknown','stale']).join(', '))],['Security',esc(sp.security||'Authorization is enforced server-side in production; UI visibility is not authorization. Privileged actions require fresh authorization and are audited.')],['Accessibility',esc(sp.a11y||'Keyboard operable; visible focus; labels for every control; status announced via live region; no information by color alone.')],['Acceptance',esc(sp.accept||'To be defined by the product owner; this prototype is not acceptance evidence.')]])}
   <h3 style="margin:16px 0 6px">Simulated actions this session</h3>${simLog.length?ui.list(simLog.slice(-8).reverse().map(l=>({title:esc(l.title),sub:esc(l.t+' · '+l.msg)}))):'<p class="muted">None yet.</p>'}
   </aside>`;
