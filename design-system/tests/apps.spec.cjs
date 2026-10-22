@@ -48,6 +48,26 @@ for (const [prefix, dir] of APPS) {
       expect(found, 'axe violations').toEqual([]);
     });
 
+
+    test('build-status labels match each screen and spec drawer (simulated)', async ({ page }) => {
+      await page.goto(urlFor(dir));
+      const entries = await page.evaluate(() =>
+        Object.entries(window.SCREENS).map(([id, screen]) => [id, screen.status || 'proposed', Boolean(screen.bare)])
+      );
+      for (const [id, expected, bare] of entries) {
+        await page.evaluate(i => { location.hash = '#/' + i; }, id);
+        const badge = page.locator('#main [data-status]');
+        await expect(badge, id + ' has one build-status badge').toHaveCount(1);
+        await expect(badge).toHaveAttribute('data-status', expected);
+        if (bare) await expect(page.locator('#main .bare-build-status')).toBeVisible();
+        await page.getByRole('button', { name: 'Screen spec' }).click();
+        await expect(page.getByText('Build status: ' + expected)).toBeVisible();
+        await expect(page.getByText(/not design approval/i)).toBeVisible();
+        await page.keyboard.press('Escape');
+        await expect(page.getByRole('dialog', { name: 'Screen spec · ' + id })).toHaveCount(0);
+      }
+    });
+
     test('keyboard: skip link, command palette and spec drawer open and close with Escape', async ({ page }) => {
       await page.goto(urlFor(dir));
       await page.keyboard.press('Control+k');
@@ -55,9 +75,9 @@ for (const [prefix, dir] of APPS) {
       await page.keyboard.press('Escape');
       await expect(page.getByRole('dialog', { name: 'Jump to screen' })).toHaveCount(0);
       await page.getByRole('button', { name: 'Screen spec' }).click();
-      await expect(page.getByText('Status: proposed')).toBeVisible();
+      await expect(page.getByText('Build status: proposed')).toBeVisible();
       await page.keyboard.press('Escape');
-      await expect(page.getByText('Status: proposed')).toHaveCount(0);
+      await expect(page.getByText('Build status: proposed')).toHaveCount(0);
     });
   });
 }
