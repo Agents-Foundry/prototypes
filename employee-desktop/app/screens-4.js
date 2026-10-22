@@ -2,7 +2,7 @@
 (function(){
 const S=window.SCREENS,U=AF.ui,E=AF.esc,D=window.EMP_DATA;
 
-S['EMP-019']={title:'New task',group:'Work',navId:'EMP-019',permission:'task.create',
+S['EMP-019']={title:'New task',status:'partial',group:'Work',navId:'EMP-019',permission:'task.create',
   lead:'Delegate work with clear limits. The agent plans first and asks before anything leaves this workspace.',
   state:{agent:'nova',goal:'',env:'Staging',story:'QA-184',autonomy:'ask',limit:'30',tried:false},noEmpty:true,
   render(c){const s=c.s;const bad=s.tried&&s.goal.trim().length<8;

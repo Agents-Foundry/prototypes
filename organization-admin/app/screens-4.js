@@ -13,7 +13,7 @@ S['ORG-021']={title:'AI employee · QA Engineer · Nova',group:'Workforce',navId
     ${s.tab==='runs'?U.card('',U.table(['Task','Started','Outcome','Cost'],[['Validate checkout regression','12 min ago',U.badge('Waiting on approval','info'),'$0.42'],['Review login flow cases','2 h ago',U.badge('Completed','ok'),'$0.28'],['Smoke test release 4.8','Yesterday',U.badge('Failed (env down)','bad'),'$0.11']]),{flush:true}):''}
     ${s.tab==='audit'?U.card('Recent activity',U.timeline([{tone:'ok',title:'Read QA-184',sub:'12 min ago'},{tone:'wait',title:'Requested approval: attach test cases to QA-184',sub:'11 min ago · pending'},{tone:'ok',title:'Capabilities narrowed by Alex Rivera',sub:'3 days ago'}])):''}`}};
 
-S['ORG-022']={title:'Usage & spend',group:'Insight',navId:'ORG-022',permission:'org.billing.view',
+S['ORG-022']={title:'Usage & spend',status:'partial',group:'Insight',navId:'ORG-022',permission:'org.billing.view',
   lead:'What your AI workforce costs, by team and model. Budgets alert at 80% and stop new runs at 100%.',
   state:{range:'month',budget:'500'},emptyText:'Usage appears after your first AI employee runs a task.',
   render(c){const s=c.s;
