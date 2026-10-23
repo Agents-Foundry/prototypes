@@ -4,17 +4,17 @@ EMP-002,Employee Desktop,Workspace,Work,employee-desktop/app/screens-1.js,redesi
 EMP-003,Employee Desktop,Conversation · Nova,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
 EMP-004,Employee Desktop,Run plan & progress,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
 EMP-005,Employee Desktop,Tool permission request,Work,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
-EMP-006,Employee Desktop,Accounts & vault,Account,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
+EMP-006,Employee Desktop,Connections your agent uses,Account,employee-desktop/app/screens-1.js,redesign of legacy ID,proposed
 EMP-007,Employee Desktop,Jira work · QA-184,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
 EMP-008,Employee Desktop,Browser & test execution,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
 EMP-009,Employee Desktop,Artifacts & evidence,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
 EMP-010,Employee Desktop,Repository context,Evidence,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
-EMP-011,Employee Desktop,"Skills, tools & connectors",Agents,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
+EMP-011,Employee Desktop,What this agent can do,Agents,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
 EMP-012,Employee Desktop,Notifications & approvals,Work,employee-desktop/app/screens-2.js,redesign of legacy ID,proposed
 EMP-013,Employee Desktop,History & search,Library,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
 EMP-014,Employee Desktop,Environment manager,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
 EMP-015,Employee Desktop,Settings & privacy,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
-EMP-016,Employee Desktop,Recovery & offline workspace,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
+EMP-016,Employee Desktop,Run recovery,Account,employee-desktop/app/screens-3.js,redesign of legacy ID,proposed
 EMP-017,Employee Desktop,Welcome,Access,employee-desktop/app/screens-3.js,new,proposed
 EMP-018,Employee Desktop,My agents,Agents,employee-desktop/app/screens-3.js,new,proposed
 EMP-019,Employee Desktop,New task,Work,employee-desktop/app/screens-4.js,new,proposed
