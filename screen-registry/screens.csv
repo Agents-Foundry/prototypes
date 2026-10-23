@@ -27,15 +27,15 @@ ORG-001,Organization Admin,Admin sign-in,Access,organization-admin/app/screens-1
 ORG-002,Organization Admin,Setup guide,Overview,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
 ORG-003,Organization Admin,Organization details,Organization,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
 ORG-004,Organization Admin,Dashboard,Overview,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
-ORG-005,Organization Admin,Teams & departments,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
-ORG-006,Organization Admin,Roles & positions,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
-ORG-007,Organization Admin,AI employees,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
-ORG-008,Organization Admin,Hire: choose a blueprint,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
-ORG-009,Organization Admin,Hire: configure,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
-ORG-010,Organization Admin,Hire: capabilities,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
-ORG-011,Organization Admin,Hire: integrations,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
-ORG-012,Organization Admin,Hire: review & activate,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
-ORG-013,Organization Admin,Hire: activation result,Hire AI employee,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-005,Organization Admin,Organization structure,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-006,Organization Admin,Job architecture,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-007,Organization Admin,Agent directory,Workforce,organization-admin/app/screens-1.js,redesign of legacy ID,proposed
+ORG-008,Organization Admin,Create agents: blueprint version,Create agents,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-009,Organization Admin,Create agents: installation,Create agents,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-010,Organization Admin,Create agents: preview,Create agents,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-011,Organization Admin,Create agents: connections,Create agents,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-012,Organization Admin,Create agents: review,Create agents,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
+ORG-013,Organization Admin,Create agents: result,Create agents,organization-admin/app/screens-2.js,redesign of legacy ID,proposed
 ORG-014,Organization Admin,People & invitations,Workforce,organization-admin/app/screens-3.js,new,proposed
 ORG-015,Organization Admin,Permissions & effective access,Governance,organization-admin/app/screens-3.js,new,proposed
 ORG-016,Organization Admin,Identity & SSO,Organization,organization-admin/app/screens-3.js,new,proposed
