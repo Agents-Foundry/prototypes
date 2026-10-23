@@ -35,7 +35,7 @@ S['STD-001']={title:'Sign in & workspace selection',bare:true,group:'Access',per
     :`<h1>Choose a workspace</h1><p class="muted">You belong to two organizations. Studio content never crosses organizations.</p><div style="margin:14px 0;display:grid;gap:8px">${[['codifyd-eng','Codifyd · Engineering','Author · 8 blueprints'],['northwind','Northwind Labs','Reviewer · 3 pending reviews']].map(([v,n,r])=>`<button type="button" class="tplcard" aria-pressed="${s.ws===v}" data-set="ws=${v}"><b>${n}</b><br><small class="muted">${r}</small></button>`).join('')}</div>${ui.btn('Open workspace','primary','data-go="STD-002"')}`;
     return `<div class="auth"><div class="card">${body}</div><p class="muted" style="text-align:center;margin-top:12px"><small>Prototype · no authentication occurs</small></p></div>`}};
 
-S['STD-002']={title:'Blueprint catalog',group:'Blueprints',navId:'STD-002',permission:'blueprint.view',
+S['STD-002']={title:'Blueprint catalog',status:'partial',group:'Blueprints',navId:'STD-002',permission:'blueprint.view',
   lead:'Reusable agent blueprints for your organization. Only published versions can be hired by organization admins.',
   state:{q:'',status:'all'},emptyText:'Create your first blueprint from a template to start designing an AI employee.',emptyAction:ui.btn('New blueprint','primary','data-go="STD-003"'),
   spec:{goal:'Find, filter and open blueprints; see status and adoption at a glance.'},
@@ -57,7 +57,7 @@ S['STD-003']={title:'Create blueprint',status:'planned',group:'Blueprints',navId
     <div style="height:16px"></div>${ui.card('2 · Describe it',`${ui.input('Blueprint name',{bind:'name',value:s.name,ph:'e.g. Accessibility Auditor',error:bad?'Enter a name of at least 3 characters.':'',req:true})}${ui.select('Department',{bind:'dept',value:s.dept,options:['Engineering','Operations','Product','Customer Success','People']})}${ui.textarea('Purpose',{bind:'purpose',value:s.purpose,ph:'What job does this AI employee do, and for whom?',hint:'Shown to organization admins when they hire it.'})}`)}</div>
     <aside class="sidepanel">${ui.card('Baseline safeguards',ui.list([{title:'Read-only tools',sub:'Writes need explicit approval'},{title:'Fail closed',sub:'Denied or unknown actions never proceed'},{title:'Draft only',sub:'Not visible to organization admins'},{title:'Independent review',sub:'Required before publishing'}].map(x=>({...x,lead:'<span class="badge ok">✓</span>'})))+`<div style="margin-top:14px">${s.name.trim().length>=3?ui.btn('Create draft','primary','data-write data-sim="Draft blueprint “'+esc(s.name)+'” created from template" data-title="Create blueprint" data-after="tried=false"'):ui.btn('Create draft','primary','data-set="tried=true"')}</div>`)}</aside></div>`}};
 
-S['STD-004']={title:'QA Engineer · overview',group:'Blueprints',navId:'STD-004',permission:'blueprint.view',
+S['STD-004']={title:'QA Engineer · overview',status:'partial',group:'Blueprints',navId:'STD-004',permission:'blueprint.view',
   lead:'Draft 2.1.0 of the QA Engineer blueprint. Published version 2.0.3 is in use by 14 organizations.',
   state:{tab:'readiness'},
   spec:{goal:'See version, readiness checks and adoption in one place; jump to the next unfinished task.'},

@@ -33,7 +33,7 @@ S['EMP-003']={title:'Conversation · Nova',group:'Work',navId:'EMP-003',permissi
     <aside class="sidepanel">${U.card('Context',U.kv([['Task','Validate checkout regression'],['Story',`<a href="#/EMP-007">${D.story.id}</a>`],['Environment','Staging (non-production)'],['Authority','Read; writes ask first']]))}<div style="height:16px"></div>${U.card('Quick actions',`<div style="display:grid;gap:8px">${U.btn('View run plan','','data-go="EMP-004"')}${U.btn('Open evidence','','data-go="EMP-009"')}${U.btn('Stop the agent','danger','data-sim="Ask Nova to stop at the next safe checkpoint" data-title="Stop agent" data-write')}</div>`)}</aside></div>`},
   act(n,a,c){if(n==='send'){const t=c.s.draft.trim();if(!t)return;c.s.msgs.push(['me',t]);c.s.msgs.push(['agent','Understood. I will factor that in and tell you before any change outside this workspace.']);c.s.draft=''}}};
 
-S['EMP-004']={title:'Run plan & progress',group:'Work',navId:'EMP-004',permission:'run.view',
+S['EMP-004']={title:'Run plan & progress',status:'partial',group:'Work',navId:'EMP-004',permission:'run.view',
   lead:'Run 2291 · Validate checkout regression. Every step shows what it will do, what it did and what is still unconfirmed.',
   noEmpty:true,
   render(c){const r=run(c);const cur=r.approval===''?2:r.approval==='allowed'?3:3;
@@ -44,7 +44,7 @@ S['EMP-004']={title:'Run plan & progress',group:'Work',navId:'EMP-004',permissio
     <aside class="sidepanel">${U.card('Controls',`<div style="display:grid;gap:8px">${r.mode==='paused'?U.btn('Resume','primary','data-write data-act="mode:running"'):U.btn('Pause at next checkpoint','','data-write data-act="mode:paused"')}${U.btn('Cancel run','danger','data-write data-act="mode:cancelling"')}${r.mode==='cancelling'?U.btn('Reconcile result','','data-act="mode:cancelled"'):''}${r.approval===''?U.btn('Review approval request','primary','data-go="EMP-005"'):''}</div>`)}<div style="height:16px"></div>${U.card('Checkpoint',`<p class="muted">Last saved 40 seconds ago. If you go offline, work resumes from here after re-authorization.</p>${U.btn('Open recovery','sm','data-go="EMP-016"')}`)}</aside></div>`},
   act(n,[v],c){if(n==='mode')run(c).mode=v}};
 
-S['EMP-005']={title:'Tool permission request',group:'Work',navId:'EMP-012',permission:'approval.decide',
+S['EMP-005']={title:'Tool permission request',status:'partial',group:'Work',navId:'EMP-012',permission:'approval.decide',
   lead:'Nova wants to do one specific thing. You approve exactly this action, once. Anything different needs a new request.',
   state:{view:'normal'},noEmpty:true,
   spec:{goal:'Give scoped, single-use consent with full information, and fail closed when anything changed.',states:['requested','allowed once','denied','expired','target changed','policy changed','revoked'],security:'Approval binds to the exact action, target and environment; policy is re-checked at execution. Never reusable.'},

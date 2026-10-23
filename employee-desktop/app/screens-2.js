@@ -24,7 +24,7 @@ S['EMP-008']={title:'Browser & test execution',group:'Evidence',navId:'EMP-008',
     ${s.view!=='live'?U.card('',U.table(['Case','Description','Result'],rows,{caption:'Test results'}),{flush:true}):''}
     ${started?U.notice('warn','2 failures found','TC-02 and TC-04 failed. Evidence is available.')+U.btn('Open evidence','primary','data-go="EMP-009"'):''}`}};
 
-S['EMP-009']={title:'Artifacts & evidence',group:'Evidence',navId:'EMP-009',permission:'artifact.view',
+S['EMP-009']={title:'Artifacts & evidence',status:'partial',group:'Evidence',navId:'EMP-009',permission:'artifact.view',
   lead:'Everything the agent produced. Evidence is sanitized and tied to the run that created it.',
   state:{sel:'checkout-double-discount.png'},emptyText:'Artifacts from runs appear here.',
   render(c){const s=c.s;const a=D.artifacts.find(x=>x.n===s.sel)||D.artifacts[0];
